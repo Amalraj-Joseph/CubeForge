@@ -67,18 +67,6 @@ class Position:
         """
         return self._faces
 
-    @property
-    def ordered_faces(self) -> tuple[LogicalFace, ...]:
-        """
-        Returns the logical faces in canonical order.
-        """
-        return tuple(
-            sorted(
-                self._faces,
-                key=lambda face: face.bit_index,
-            )
-        )
-
     def contains(
         self,
         face: LogicalFace,
@@ -87,35 +75,3 @@ class Position:
         Returns True if this Position contains the given LogicalFace.
         """
         return face in self._faces
-
-    @property
-    def notation(self) -> str:
-        """
-        Returns the canonical position notation.
-
-        Examples
-
-        U
-        UF
-        UFR
-        """
-        return "".join(
-            face.symbol
-            for face in self.ordered_faces
-        )
-
-    @property
-    def description(self) -> str:
-        """
-        Returns a human-readable description.
-        """
-        return (
-            f"{self.position_type.display_name}"
-            f"({self.notation})"
-        )
-
-    def describe(self) -> str:
-        return self.description
-
-    def __str__(self) -> str:
-        return self.description
