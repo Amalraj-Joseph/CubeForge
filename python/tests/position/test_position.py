@@ -106,21 +106,6 @@ def test_faces_are_immutable():
         position.faces.add(LogicalFace.RIGHT)
 
 
-def test_ordered_faces_are_canonical():
-    position = Position(
-        PositionType.CORNER,
-        LogicalFace.RIGHT,
-        LogicalFace.UP,
-        LogicalFace.FRONT,
-    )
-
-    assert position.ordered_faces == (
-        LogicalFace.UP,
-        LogicalFace.FRONT,
-        LogicalFace.RIGHT,
-    )
-
-
 # ==============================================================================
 # Membership
 # ==============================================================================
@@ -140,43 +125,6 @@ def test_contains():
     assert not position.contains(LogicalFace.DOWN)
     assert not position.contains(LogicalFace.LEFT)
     assert not position.contains(LogicalFace.BACK)
-
-
-# ==============================================================================
-# Notation
-# ==============================================================================
-
-@pytest.mark.parametrize(
-    ("position", "notation"),
-    [
-        (
-            Position(
-                PositionType.CENTER,
-                LogicalFace.UP,
-            ),
-            "U",
-        ),
-        (
-            Position(
-                PositionType.EDGE,
-                LogicalFace.FRONT,
-                LogicalFace.UP,
-            ),
-            "UF",
-        ),
-        (
-            Position(
-                PositionType.CORNER,
-                LogicalFace.RIGHT,
-                LogicalFace.FRONT,
-                LogicalFace.UP,
-            ),
-            "UFR",
-        ),
-    ],
-)
-def test_notation(position, notation):
-    assert position.notation == notation
 
 
 # ==============================================================================
@@ -234,30 +182,6 @@ def test_hashable():
 
 
 # ==============================================================================
-# Representation
-# ==============================================================================
-
-def test_description():
-    position = Position(
-        PositionType.CORNER,
-        LogicalFace.RIGHT,
-        LogicalFace.UP,
-        LogicalFace.FRONT,
-    )
-
-    assert position.describe() == "Corner(UFR)"
-
-
-def test_string_representation():
-    position = Position(
-        PositionType.CENTER,
-        LogicalFace.UP,
-    )
-
-    assert str(position) == position.describe()
-
-
-# ==============================================================================
 # Contract
 # ==============================================================================
 
@@ -270,11 +194,11 @@ def test_position_contract():
     )
 
     assert isinstance(position.faces, frozenset)
-    assert isinstance(position.ordered_faces, tuple)
-    assert isinstance(position.notation, str)
-    assert isinstance(position.description, str)
 
     assert len(position.faces) == position.position_type.face_count
 
-    assert position.notation == "UFR"
-    assert position.description == "Corner(UFR)"
+    assert position.faces == frozenset({
+        LogicalFace.UP,
+        LogicalFace.FRONT,
+        LogicalFace.RIGHT,
+    })
