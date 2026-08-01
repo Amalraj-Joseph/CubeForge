@@ -10,48 +10,67 @@ class LogicalFace(Enum):
     Logical faces are relative to the current Cube Orientation.
     """
 
-    UP = ("U", "Up", "Y")
-    DOWN = ("D", "Down", "Y")
+    UP = ("U", "Up", "Y", 0)
+    DOWN = ("D", "Down", "Y", 1)
 
-    FRONT = ("F", "Front", "Z")
-    BACK = ("B", "Back", "Z")
+    FRONT = ("F", "Front", "Z", 2)
+    BACK = ("B", "Back", "Z", 3)
 
-    LEFT = ("L", "Left", "X")
-    RIGHT = ("R", "Right", "X")
-
-    def __init__(self, notation: str, display_name: str, axis: str):
-        self._notation = notation
-        self._display_name = display_name
-        self._axis = axis
+    LEFT = ("L", "Left", "X", 4)
+    RIGHT = ("R", "Right", "X", 5)
 
     @property
-    def notation(self) -> str:
-        return self._notation
+    def symbol(self) -> str:
+        """
+        Returns the canonical single-letter symbol.
+        """
+        return self.value[0]
 
     @property
     def display_name(self) -> str:
-        return self._display_name
+        """
+        Returns the human-readable name.
+        """
+        return self.value[1]
 
     @property
     def axis(self) -> str:
-        return self._axis
+        """
+        Returns the axis to which this face belongs.
+        """
+        return self.value[2]
+
+    @property
+    def bit_index(self) -> int:
+        """
+        Returns the canonical ordering index.
+        """
+        return self.value[3]
 
     @property
     def opposite(self) -> "LogicalFace":
+        """
+        Returns the opposite logical face.
+        """
         return _OPPOSITES[self]
 
     def describe(self) -> str:
         return self.display_name
 
     @classmethod
-    def from_notation(cls, notation: str) -> "LogicalFace":
+    def from_symbol(cls, symbol: str) -> "LogicalFace":
+        """
+        Returns the LogicalFace corresponding to the given symbol.
+        """
         try:
-            return _BY_NOTATION[notation]
+            return _BY_SYMBOL[symbol]
         except KeyError as ex:
-            raise ValueError(f"Unknown face notation: {notation}") from ex
+            raise ValueError(
+                f"Unknown logical face symbol: {symbol}"
+            ) from ex
 
     def __str__(self) -> str:
-        return self.notation
+        return self.symbol
 
 
 _OPPOSITES = {
@@ -66,7 +85,7 @@ _OPPOSITES = {
 }
 
 
-_BY_NOTATION = {
-    face.notation: face
+_BY_SYMBOL = {
+    face.symbol: face
     for face in LogicalFace
 }

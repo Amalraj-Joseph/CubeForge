@@ -14,10 +14,10 @@ class PositionType(Enum):
     CORNER = 3
 
     @property
-    def color_count(self) -> int:
+    def face_count(self) -> int:
         """
-        Returns the number of faces meeting at
-        this position.
+        Returns the number of logical faces that
+        define this position.
         """
         return self.value
 

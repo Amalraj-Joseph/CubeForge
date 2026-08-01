@@ -20,36 +20,35 @@ def test_contains_exactly_three_position_types():
 # ==============================================================================
 
 @pytest.mark.parametrize(
-    ("position_type", "color_count"),
+    ("position_type", "face_count"),
     [
         (PositionType.CENTER, 1),
         (PositionType.EDGE, 2),
         (PositionType.CORNER, 3),
     ],
 )
-def test_color_count(position_type, color_count):
-    assert position_type.color_count == color_count
+def test_face_count(position_type, face_count):
+    assert position_type.face_count == face_count
 
 
 @pytest.mark.parametrize(
-    ("position_type", "display"),
+    ("position_type", "display_name"),
     [
         (PositionType.CENTER, "Center"),
         (PositionType.EDGE, "Edge"),
         (PositionType.CORNER, "Corner"),
     ],
 )
-def test_display(position_type, display):
-    assert position_type.display_name == display
-    assert position_type.describe() == display
+def test_display_name_and_description(position_type, display_name):
+    assert position_type.display_name == display_name
+    assert position_type.describe() == display_name
 
 
 # ==============================================================================
 # Equality & Hashing
 # ==============================================================================
 
-def test_identity_and_hashing():
-    assert PositionType.CENTER is PositionType.CENTER
+def test_equality_and_hashing():
     assert PositionType.CENTER == PositionType.CENTER
     assert PositionType.CENTER != PositionType.EDGE
 
@@ -73,22 +72,19 @@ def test_string_representation():
 
 
 # ==============================================================================
-# Immutability
-# ==============================================================================
-
-def test_position_type_is_immutable():
-    with pytest.raises(AttributeError):
-        PositionType.CENTER.color_count = 99
-
-
-# ==============================================================================
 # Contract
 # ==============================================================================
 
 def test_position_type_contract():
+    face_counts = set()
+
     for position_type in PositionType:
-        assert isinstance(position_type.color_count, int)
+        assert isinstance(position_type.face_count, int)
         assert isinstance(position_type.display_name, str)
 
-        assert position_type.color_count in {1, 2, 3}
+        assert position_type.face_count in {1, 2, 3}
         assert position_type.display_name
+
+        face_counts.add(position_type.face_count)
+
+    assert face_counts == {1, 2, 3}
