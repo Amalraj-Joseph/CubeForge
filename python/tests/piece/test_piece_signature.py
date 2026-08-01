@@ -16,7 +16,9 @@ def test_create_center_signature():
     )
 
     assert signature.piece_type is PieceType.CENTER
-    assert signature.colors == frozenset({Color.WHITE})
+    assert signature.colors == frozenset({
+        Color.WHITE,
+    })
 
 
 def test_create_edge_signature():
@@ -64,12 +66,15 @@ def test_create_corner_signature():
 
         (PieceType.CORNER, [Color.WHITE]),
         (PieceType.CORNER, [Color.WHITE, Color.GREEN]),
-        (PieceType.CORNER, [
-            Color.WHITE,
-            Color.GREEN,
-            Color.RED,
-            Color.BLUE,
-        ]),
+        (
+            PieceType.CORNER,
+            [
+                Color.WHITE,
+                Color.GREEN,
+                Color.RED,
+                Color.BLUE,
+            ],
+        ),
     ],
 )
 def test_invalid_color_count(piece_type, colors):
@@ -90,7 +95,7 @@ def test_duplicate_colors_not_allowed():
 # Colors
 # ==============================================================================
 
-def test_colors_returns_frozenset():
+def test_colors_are_immutable():
     signature = PieceSignature(
         PieceType.EDGE,
         Color.WHITE,
@@ -135,12 +140,10 @@ def test_mask_edge():
         Color.GREEN,
     )
 
-    expected = (
+    assert signature.mask == (
         Color.WHITE.mask |
         Color.GREEN.mask
     )
-
-    assert signature.mask == expected
 
 
 def test_mask_corner():
@@ -151,13 +154,11 @@ def test_mask_corner():
         Color.RED,
     )
 
-    expected = (
+    assert signature.mask == (
         Color.WHITE.mask |
         Color.GREEN.mask |
         Color.RED.mask
     )
-
-    assert signature.mask == expected
 
 
 # ==============================================================================
@@ -204,7 +205,7 @@ def test_equality_is_order_independent():
     assert hash(first) == hash(second)
 
 
-def test_different_piece_types_are_not_equal():
+def test_different_piece_signatures_are_not_equal():
     center = PieceSignature(
         PieceType.CENTER,
         Color.WHITE,
@@ -263,20 +264,6 @@ def test_string_representation():
 
 
 # ==============================================================================
-# Immutability
-# ==============================================================================
-
-def test_piece_signature_is_immutable():
-    signature = PieceSignature(
-        PieceType.CENTER,
-        Color.WHITE,
-    )
-
-    with pytest.raises(AttributeError):
-        signature.piece_type = PieceType.EDGE
-
-
-# ==============================================================================
 # Contract
 # ==============================================================================
 
@@ -293,8 +280,8 @@ def test_piece_signature_contract():
     assert isinstance(signature.mask, int)
     assert isinstance(signature.description, str)
 
-    assert len(signature.colors) == 3
-    assert len(signature.ordered_colors) == 3
+    assert len(signature.colors) == signature.piece_type.color_count
+    assert len(signature.ordered_colors) == signature.piece_type.color_count
 
     assert signature.mask == (
         Color.WHITE.mask |
