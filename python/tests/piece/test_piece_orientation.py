@@ -178,6 +178,31 @@ def test_string_representation():
 
     assert str(orientation) == orientation.describe()
 
+# ==============================================================================
+# Convention
+# ==============================================================================
+
+def test_orientation_convention():
+    center = PieceOrientation(
+        PieceType.CENTER,
+        0,
+    )
+
+    edge = PieceOrientation(
+        PieceType.EDGE,
+        0,
+    )
+
+    corner = PieceOrientation(
+        PieceType.CORNER,
+        0,
+    )
+
+    assert center.rotate(1) == center
+
+    assert edge.rotate(2) == edge
+
+    assert corner.rotate(3) == corner
 
 # ==============================================================================
 # Contract
