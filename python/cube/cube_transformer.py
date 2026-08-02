@@ -11,6 +11,7 @@ from cube.move.rotation import Rotation
 from cube.piece.piece import Piece
 from cube.piece.piece_state import PieceState
 from cube.piece.piece_type import PieceType
+from cube.algorithm.algorithm import Algorithm
 
 
 class CubeTransformer:
@@ -41,6 +42,24 @@ class CubeTransformer:
             state = CubeTransformer._apply_transformation(
                 state,
                 transformation,
+            )
+
+        return state
+    
+    @staticmethod
+    def apply_algorithm(
+        cube: CubeState,
+        algorithm: Algorithm,
+    ) -> CubeState:
+        """
+        Applies an Algorithm to a CubeState.
+        """
+        state = cube
+
+        for move in algorithm:
+            state = CubeTransformer.apply(
+                state,
+                move,
             )
 
         return state

@@ -1,5 +1,6 @@
 from cube.cube_transformer import CubeTransformer
 from cube.piece.piece_type import PieceType
+from cube.algorithm.algorithm import Algorithm
 from cube.internal.canonical_cube_state import (
     CANONICAL_CUBE_STATE,
 )
@@ -256,3 +257,86 @@ def test_corner_twist_sum():
         )
 
         assert total % 3 == 0
+
+
+# ==============================================================================
+# Algorithms
+# ==============================================================================
+
+def test_empty_algorithm():
+    transformed = CubeTransformer.apply_algorithm(
+        CANONICAL_CUBE_STATE,
+        Algorithm(),
+    )
+
+    assert transformed == CANONICAL_CUBE_STATE
+
+
+def test_single_move_algorithm():
+    algorithm = Algorithm(R)
+
+    first = CubeTransformer.apply_algorithm(
+        CANONICAL_CUBE_STATE,
+        algorithm,
+    )
+
+    second = CubeTransformer.apply(
+        CANONICAL_CUBE_STATE,
+        R,
+    )
+
+    assert first == second
+
+
+def test_multiple_move_algorithm():
+    algorithm = Algorithm(
+        R,
+        U,
+        R_PRIME,
+    )
+
+    first = CubeTransformer.apply_algorithm(
+        CANONICAL_CUBE_STATE,
+        algorithm,
+    )
+
+    second = CubeTransformer.apply(
+        CubeTransformer.apply(
+            CubeTransformer.apply(
+                CANONICAL_CUBE_STATE,
+                R,
+            ),
+            U,
+        ),
+        R_PRIME,
+    )
+
+    assert first == second
+
+
+def test_algorithm_inverse():
+    algorithm = Algorithm(
+        R,
+        U,
+        R_PRIME,
+        U_PRIME,
+    )
+
+    inverse = Algorithm(
+        U,
+        R,
+        U_PRIME,
+        R_PRIME,
+    )
+
+    transformed = CubeTransformer.apply_algorithm(
+        CANONICAL_CUBE_STATE,
+        algorithm,
+    )
+
+    restored = CubeTransformer.apply_algorithm(
+        transformed,
+        inverse,
+    )
+
+    assert restored == CANONICAL_CUBE_STATE
