@@ -8,18 +8,37 @@ from cube.piece.piece_type import PieceType
 @dataclass(frozen=True, slots=True)
 class PieceOrientation:
     """
-    Represents the orientation of a physical piece.
+    Represents the orientation of a physical cube piece.
 
-    Orientation is encoded as an integer.
+    Orientation is encoded as an integer modulo the number of stickers
+    on the piece.
 
     Center
         0
 
+        Centers have a single orientation.
+
     Edge
-        0, 1
+        0
+            Solved orientation.
+
+        1
+            Flipped.
 
     Corner
-        0, 1, 2
+        0
+            Solved orientation.
+
+        1
+            One clockwise twist.
+
+        2
+            Two clockwise twists
+            (equivalent to one counterclockwise twist).
+
+    CubeCore adopts clockwise corner twists as the positive direction.
+    All corner orientation arithmetic is performed modulo 3.
+    Edge orientation arithmetic is performed modulo 2.
     """
 
     piece_type: PieceType
