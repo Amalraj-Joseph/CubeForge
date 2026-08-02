@@ -15,6 +15,7 @@ def test_piece_counts():
     assert len(CENTER_PIECES) == 6
     assert len(EDGE_PIECES) == 12
     assert len(CORNER_PIECES) == 8
+
     assert len(ALL_PIECES) == 26
 
 
@@ -23,7 +24,9 @@ def test_piece_counts():
 # ==============================================================================
 
 def test_all_pieces_are_unique():
-    assert len(set(ALL_PIECES)) == 26
+    assert len(
+        set(ALL_PIECES)
+    ) == 26
 
 
 def test_all_piece_signatures_are_unique():
@@ -53,21 +56,21 @@ def test_all_pieces_collection():
 
 def test_center_pieces():
     assert all(
-        piece.signature.piece_type is PieceType.CENTER
+        piece.piece_type is PieceType.CENTER
         for piece in CENTER_PIECES
     )
 
 
 def test_edge_pieces():
     assert all(
-        piece.signature.piece_type is PieceType.EDGE
+        piece.piece_type is PieceType.EDGE
         for piece in EDGE_PIECES
     )
 
 
 def test_corner_pieces():
     assert all(
-        piece.signature.piece_type is PieceType.CORNER
+        piece.piece_type is PieceType.CORNER
         for piece in CORNER_PIECES
     )
 
@@ -78,6 +81,27 @@ def test_corner_pieces():
 
 def test_canonical_piece_contract():
     for piece in ALL_PIECES:
-        signature = piece.signature
+        assert (
+            piece.layout.piece_type
+            is piece.piece_type
+        )
 
-        assert len(signature.colors) == signature.piece_type.color_count
+        assert (
+            piece.layout.colors
+            == piece.colors
+        )
+
+        assert (
+            len(piece.colors)
+            == piece.piece_type.color_count
+        )
+
+        assert (
+            len(piece.layout.faces)
+            == piece.piece_type.color_count
+        )
+
+        assert (
+            len(piece.layout.stickers)
+            == piece.piece_type.color_count
+        )

@@ -1,10 +1,12 @@
 import pytest
 
-from cube.color.color import Color
 from cube.face.logical_face import LogicalFace
-from cube.piece.piece import Piece
+from cube.internal.canonical_pieces import (
+    WHITE_CENTER,
+    WHITE_GREEN_EDGE,
+    WHITE_GREEN_RED_CORNER,
+)
 from cube.piece.piece_orientation import PieceOrientation
-from cube.piece.piece_signature import PieceSignature
 from cube.piece.piece_state import PieceState
 from cube.piece.piece_type import PieceType
 from cube.position.position import Position
@@ -15,29 +17,9 @@ from cube.position.position_type import PositionType
 # Fixtures
 # ==============================================================================
 
-CENTER_PIECE = Piece(
-    PieceSignature(
-        PieceType.CENTER,
-        Color.WHITE,
-    )
-)
-
-EDGE_PIECE = Piece(
-    PieceSignature(
-        PieceType.EDGE,
-        Color.WHITE,
-        Color.GREEN,
-    )
-)
-
-CORNER_PIECE = Piece(
-    PieceSignature(
-        PieceType.CORNER,
-        Color.WHITE,
-        Color.GREEN,
-        Color.RED,
-    )
-)
+CENTER_PIECE = WHITE_CENTER
+EDGE_PIECE = WHITE_GREEN_EDGE
+CORNER_PIECE = WHITE_GREEN_RED_CORNER
 
 CENTER_POSITION = Position(
     PositionType.CENTER,
@@ -156,6 +138,117 @@ def test_piece_type():
 
 
 # ==============================================================================
+# Projection
+# ==============================================================================
+
+def test_projected_layout():
+    state = PieceState(
+        EDGE_PIECE,
+        EDGE_POSITION,
+        PieceOrientation(
+            PieceType.EDGE,
+            1,
+        ),
+    )
+
+    projected = state.projected_layout
+
+    assert (
+        projected.color_on(
+            LogicalFace.UP,
+        )
+        is EDGE_PIECE.layout.color_on(
+            LogicalFace.FRONT,
+        )
+    )
+
+    assert (
+        projected.color_on(
+            LogicalFace.FRONT,
+        )
+        is EDGE_PIECE.layout.color_on(
+            LogicalFace.UP,
+        )
+    )
+
+
+# ==============================================================================
+# Occupancy
+# ==============================================================================
+
+def test_occupies():
+    state = PieceState(
+        EDGE_PIECE,
+        EDGE_POSITION,
+        PieceOrientation(
+            PieceType.EDGE,
+            0,
+        ),
+    )
+
+    assert state.occupies(
+        LogicalFace.UP,
+    )
+
+    assert state.occupies(
+        LogicalFace.FRONT,
+    )
+
+    assert not state.occupies(
+        LogicalFace.RIGHT,
+    )
+
+
+# ==============================================================================
+# Visible Stickers
+# ==============================================================================
+
+def test_color_on():
+    state = PieceState(
+        EDGE_PIECE,
+        EDGE_POSITION,
+        PieceOrientation(
+            PieceType.EDGE,
+            1,
+        ),
+    )
+
+    assert (
+        state.color_on(
+            LogicalFace.UP,
+        )
+        is EDGE_PIECE.layout.color_on(
+            LogicalFace.FRONT,
+        )
+    )
+
+    assert (
+        state.color_on(
+            LogicalFace.FRONT,
+        )
+        is EDGE_PIECE.layout.color_on(
+            LogicalFace.UP,
+        )
+    )
+
+
+def test_color_on_unoccupied_face():
+    state = PieceState(
+        EDGE_PIECE,
+        EDGE_POSITION,
+        PieceOrientation(
+            PieceType.EDGE,
+            0,
+        ),
+    )
+
+    with pytest.raises(ValueError):
+        state.color_on(
+            LogicalFace.RIGHT,
+        )
+
+
+# ==============================================================================
 # Equality & Hashing
 # ==============================================================================
 
@@ -237,13 +330,31 @@ def test_piece_state_contract():
     )
 
     assert (
-        state.piece.signature.piece_type.color_count
-        ==
-        state.position.position_type.face_count
+        state.piece_type.color_count
+        == state.position.position_type.face_count
     )
 
     assert (
-        state.piece.signature.piece_type.color_count
-        ==
-        state.orientation.piece_type.color_count
+        state.piece_type.color_count
+        == state.orientation.piece_type.color_count
+    )
+
+    assert (
+        state.piece.layout.piece_type
+        is state.piece_type
+    )
+
+    assert (
+        state.projected_layout.piece_type
+        is state.piece_type
+    )
+
+    assert (
+        state.projected_layout.faces
+        == state.position.faces
+    )
+
+    assert (
+        state.projected_layout.colors
+        == state.piece.colors
     )

@@ -202,3 +202,111 @@ def test_position_contract():
         LogicalFace.FRONT,
         LogicalFace.RIGHT,
     })
+
+
+# ==============================================================================
+# Ordering
+# ==============================================================================
+
+def test_ordered_faces():
+    position = Position(
+        PositionType.CORNER,
+        LogicalFace.RIGHT,
+        LogicalFace.UP,
+        LogicalFace.FRONT,
+    )
+
+    assert position.ordered_faces == (
+        LogicalFace.RIGHT,
+        LogicalFace.UP,
+        LogicalFace.FRONT,
+    )
+
+def test_faces_are_order_independent():
+    position = Position(
+        PositionType.CORNER,
+        LogicalFace.RIGHT,
+        LogicalFace.UP,
+        LogicalFace.FRONT,
+    )
+
+    assert position.faces == frozenset({
+        LogicalFace.UP,
+        LogicalFace.FRONT,
+        LogicalFace.RIGHT,
+    })
+
+# ==============================================================================
+# Representation
+# ==============================================================================
+
+@pytest.mark.parametrize(
+    ("position", "expected"),
+    [
+        (
+            Position(
+                PositionType.CENTER,
+                LogicalFace.UP,
+            ),
+            "U",
+        ),
+        (
+            Position(
+                PositionType.EDGE,
+                LogicalFace.UP,
+                LogicalFace.FRONT,
+            ),
+            "UF",
+        ),
+        (
+            Position(
+                PositionType.CORNER,
+                LogicalFace.UP,
+                LogicalFace.FRONT,
+                LogicalFace.RIGHT,
+            ),
+            "UFR",
+        ),
+    ],
+)
+def test_description(
+    position,
+    expected,
+):
+    assert position.describe() == expected
+
+
+@pytest.mark.parametrize(
+    ("position", "expected"),
+    [
+        (
+            Position(
+                PositionType.CENTER,
+                LogicalFace.UP,
+            ),
+            "U",
+        ),
+        (
+            Position(
+                PositionType.EDGE,
+                LogicalFace.UP,
+                LogicalFace.FRONT,
+            ),
+            "UF",
+        ),
+        (
+            Position(
+                PositionType.CORNER,
+                LogicalFace.UP,
+                LogicalFace.FRONT,
+                LogicalFace.RIGHT,
+            ),
+            "UFR",
+        ),
+    ],
+)
+def test_string_representation(
+    position,
+    expected,
+):
+    assert str(position) == expected

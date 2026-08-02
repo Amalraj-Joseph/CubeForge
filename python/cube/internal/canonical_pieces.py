@@ -1,4 +1,32 @@
 from cube.color.color import Color
+from cube.internal.canonical_piece_layouts import (
+    BLUE_CENTER_LAYOUT,
+    BLUE_ORANGE_EDGE_LAYOUT,
+    BLUE_RED_EDGE_LAYOUT,
+    GREEN_CENTER_LAYOUT,
+    GREEN_ORANGE_EDGE_LAYOUT,
+    GREEN_RED_EDGE_LAYOUT,
+    ORANGE_CENTER_LAYOUT,
+    RED_CENTER_LAYOUT,
+    WHITE_BLUE_EDGE_LAYOUT,
+    WHITE_BLUE_ORANGE_CORNER_LAYOUT,
+    WHITE_CENTER_LAYOUT,
+    WHITE_GREEN_EDGE_LAYOUT,
+    WHITE_GREEN_RED_CORNER_LAYOUT,
+    WHITE_ORANGE_EDGE_LAYOUT,
+    WHITE_ORANGE_GREEN_CORNER_LAYOUT,
+    WHITE_RED_BLUE_CORNER_LAYOUT,
+    WHITE_RED_EDGE_LAYOUT,
+    YELLOW_BLUE_EDGE_LAYOUT,
+    YELLOW_BLUE_RED_CORNER_LAYOUT,
+    YELLOW_CENTER_LAYOUT,
+    YELLOW_GREEN_EDGE_LAYOUT,
+    YELLOW_GREEN_ORANGE_CORNER_LAYOUT,
+    YELLOW_ORANGE_BLUE_CORNER_LAYOUT,
+    YELLOW_ORANGE_EDGE_LAYOUT,
+    YELLOW_RED_EDGE_LAYOUT,
+    YELLOW_RED_GREEN_CORNER_LAYOUT,
+)
 from cube.piece.piece import Piece
 from cube.piece.piece_signature import PieceSignature
 from cube.piece.piece_type import PieceType
@@ -12,42 +40,48 @@ WHITE_CENTER = Piece(
     PieceSignature(
         PieceType.CENTER,
         Color.WHITE,
-    )
+    ),
+    WHITE_CENTER_LAYOUT,
 )
 
 YELLOW_CENTER = Piece(
     PieceSignature(
         PieceType.CENTER,
         Color.YELLOW,
-    )
+    ),
+    YELLOW_CENTER_LAYOUT,
 )
 
 GREEN_CENTER = Piece(
     PieceSignature(
         PieceType.CENTER,
         Color.GREEN,
-    )
+    ),
+    GREEN_CENTER_LAYOUT,
 )
 
 BLUE_CENTER = Piece(
     PieceSignature(
         PieceType.CENTER,
         Color.BLUE,
-    )
+    ),
+    BLUE_CENTER_LAYOUT,
 )
 
 RED_CENTER = Piece(
     PieceSignature(
         PieceType.CENTER,
         Color.RED,
-    )
+    ),
+    RED_CENTER_LAYOUT,
 )
 
 ORANGE_CENTER = Piece(
     PieceSignature(
         PieceType.CENTER,
         Color.ORANGE,
-    )
+    ),
+    ORANGE_CENTER_LAYOUT,
 )
 
 
@@ -60,7 +94,8 @@ WHITE_GREEN_EDGE = Piece(
         PieceType.EDGE,
         Color.WHITE,
         Color.GREEN,
-    )
+    ),
+    WHITE_GREEN_EDGE_LAYOUT,
 )
 
 WHITE_RED_EDGE = Piece(
@@ -68,7 +103,8 @@ WHITE_RED_EDGE = Piece(
         PieceType.EDGE,
         Color.WHITE,
         Color.RED,
-    )
+    ),
+    WHITE_RED_EDGE_LAYOUT,
 )
 
 WHITE_BLUE_EDGE = Piece(
@@ -76,7 +112,8 @@ WHITE_BLUE_EDGE = Piece(
         PieceType.EDGE,
         Color.WHITE,
         Color.BLUE,
-    )
+    ),
+    WHITE_BLUE_EDGE_LAYOUT,
 )
 
 WHITE_ORANGE_EDGE = Piece(
@@ -84,7 +121,8 @@ WHITE_ORANGE_EDGE = Piece(
         PieceType.EDGE,
         Color.WHITE,
         Color.ORANGE,
-    )
+    ),
+    WHITE_ORANGE_EDGE_LAYOUT,
 )
 
 GREEN_RED_EDGE = Piece(
@@ -92,7 +130,8 @@ GREEN_RED_EDGE = Piece(
         PieceType.EDGE,
         Color.GREEN,
         Color.RED,
-    )
+    ),
+    GREEN_RED_EDGE_LAYOUT,
 )
 
 GREEN_ORANGE_EDGE = Piece(
@@ -100,7 +139,8 @@ GREEN_ORANGE_EDGE = Piece(
         PieceType.EDGE,
         Color.GREEN,
         Color.ORANGE,
-    )
+    ),
+    GREEN_ORANGE_EDGE_LAYOUT,
 )
 
 BLUE_RED_EDGE = Piece(
@@ -108,7 +148,8 @@ BLUE_RED_EDGE = Piece(
         PieceType.EDGE,
         Color.BLUE,
         Color.RED,
-    )
+    ),
+    BLUE_RED_EDGE_LAYOUT,
 )
 
 BLUE_ORANGE_EDGE = Piece(
@@ -116,7 +157,8 @@ BLUE_ORANGE_EDGE = Piece(
         PieceType.EDGE,
         Color.BLUE,
         Color.ORANGE,
-    )
+    ),
+    BLUE_ORANGE_EDGE_LAYOUT,
 )
 
 YELLOW_GREEN_EDGE = Piece(
@@ -124,7 +166,8 @@ YELLOW_GREEN_EDGE = Piece(
         PieceType.EDGE,
         Color.YELLOW,
         Color.GREEN,
-    )
+    ),
+    YELLOW_GREEN_EDGE_LAYOUT,
 )
 
 YELLOW_RED_EDGE = Piece(
@@ -132,7 +175,8 @@ YELLOW_RED_EDGE = Piece(
         PieceType.EDGE,
         Color.YELLOW,
         Color.RED,
-    )
+    ),
+    YELLOW_RED_EDGE_LAYOUT,
 )
 
 YELLOW_BLUE_EDGE = Piece(
@@ -140,7 +184,8 @@ YELLOW_BLUE_EDGE = Piece(
         PieceType.EDGE,
         Color.YELLOW,
         Color.BLUE,
-    )
+    ),
+    YELLOW_BLUE_EDGE_LAYOUT,
 )
 
 YELLOW_ORANGE_EDGE = Piece(
@@ -148,7 +193,8 @@ YELLOW_ORANGE_EDGE = Piece(
         PieceType.EDGE,
         Color.YELLOW,
         Color.ORANGE,
-    )
+    ),
+    YELLOW_ORANGE_EDGE_LAYOUT,
 )
 
 
@@ -162,7 +208,8 @@ WHITE_GREEN_RED_CORNER = Piece(
         Color.WHITE,
         Color.GREEN,
         Color.RED,
-    )
+    ),
+    WHITE_GREEN_RED_CORNER_LAYOUT,
 )
 
 WHITE_RED_BLUE_CORNER = Piece(
@@ -171,7 +218,8 @@ WHITE_RED_BLUE_CORNER = Piece(
         Color.WHITE,
         Color.RED,
         Color.BLUE,
-    )
+    ),
+    WHITE_RED_BLUE_CORNER_LAYOUT,
 )
 
 WHITE_BLUE_ORANGE_CORNER = Piece(
@@ -180,7 +228,8 @@ WHITE_BLUE_ORANGE_CORNER = Piece(
         Color.WHITE,
         Color.BLUE,
         Color.ORANGE,
-    )
+    ),
+    WHITE_BLUE_ORANGE_CORNER_LAYOUT,
 )
 
 WHITE_ORANGE_GREEN_CORNER = Piece(
@@ -189,7 +238,8 @@ WHITE_ORANGE_GREEN_CORNER = Piece(
         Color.WHITE,
         Color.ORANGE,
         Color.GREEN,
-    )
+    ),
+    WHITE_ORANGE_GREEN_CORNER_LAYOUT,
 )
 
 YELLOW_GREEN_ORANGE_CORNER = Piece(
@@ -198,7 +248,8 @@ YELLOW_GREEN_ORANGE_CORNER = Piece(
         Color.YELLOW,
         Color.GREEN,
         Color.ORANGE,
-    )
+    ),
+    YELLOW_GREEN_ORANGE_CORNER_LAYOUT,
 )
 
 YELLOW_RED_GREEN_CORNER = Piece(
@@ -207,7 +258,8 @@ YELLOW_RED_GREEN_CORNER = Piece(
         Color.YELLOW,
         Color.RED,
         Color.GREEN,
-    )
+    ),
+    YELLOW_RED_GREEN_CORNER_LAYOUT,
 )
 
 YELLOW_BLUE_RED_CORNER = Piece(
@@ -216,7 +268,8 @@ YELLOW_BLUE_RED_CORNER = Piece(
         Color.YELLOW,
         Color.BLUE,
         Color.RED,
-    )
+    ),
+    YELLOW_BLUE_RED_CORNER_LAYOUT,
 )
 
 YELLOW_ORANGE_BLUE_CORNER = Piece(
@@ -225,7 +278,8 @@ YELLOW_ORANGE_BLUE_CORNER = Piece(
         Color.YELLOW,
         Color.ORANGE,
         Color.BLUE,
-    )
+    ),
+    YELLOW_ORANGE_BLUE_CORNER_LAYOUT,
 )
 
 
