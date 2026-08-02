@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from cube.color.color import Color
+from cube.piece.piece_layout import PieceLayout
 from cube.piece.piece_signature import PieceSignature
 from cube.piece.piece_type import PieceType
 
@@ -13,10 +14,30 @@ class Piece:
     Represents a physical cubie.
 
     A Piece is immutable and is uniquely identified by its
-    PieceSignature.
+    PieceSignature and canonical PieceLayout.
     """
 
     signature: PieceSignature
+    layout: PieceLayout
+
+    def __post_init__(self) -> None:
+        if (
+            self.layout.piece_type
+            is not self.signature.piece_type
+        ):
+            raise ValueError(
+                "PieceSignature and PieceLayout "
+                "must have the same PieceType."
+            )
+
+        if (
+            self.layout.colors
+            != self.signature.colors
+        ):
+            raise ValueError(
+                "PieceSignature and PieceLayout "
+                "must contain the same Colors."
+            )
 
     @property
     def piece_type(self) -> PieceType:
@@ -32,7 +53,10 @@ class Piece:
         """
         return self.signature.colors
 
-    def contains(self, color: Color) -> bool:
+    def contains(
+        self,
+        color: Color,
+    ) -> bool:
         """
         Returns True if this Piece contains the given Color.
         """
