@@ -2,6 +2,7 @@ import pytest
 
 from cube.cube_state import CubeState
 from cube.internal.canonical_cube import CANONICAL_CUBE
+from cube.orientation.cube_orientation import CANONICAL_ORIENTATION
 from cube.piece.piece_orientation import PieceOrientation
 from cube.piece.piece_state import PieceState
 
@@ -26,6 +27,7 @@ def create_piece_states():
 
 def test_create_cube_state():
     cube = CubeState(
+        CANONICAL_ORIENTATION,
         *create_piece_states(),
     )
 
@@ -38,7 +40,7 @@ def test_create_cube_state():
 
 def test_requires_exactly_26_piece_states():
     with pytest.raises(ValueError):
-        CubeState()
+        CubeState(CANONICAL_ORIENTATION)
 
 
 def test_duplicate_piece_not_allowed():
@@ -48,6 +50,7 @@ def test_duplicate_piece_not_allowed():
 
     with pytest.raises(ValueError):
         CubeState(
+            CANONICAL_ORIENTATION,
             *piece_states,
         )
 
@@ -76,7 +79,7 @@ def test_duplicate_position_not_allowed():
     )
 
     with pytest.raises(ValueError):
-        CubeState(*piece_states)
+        CubeState(CANONICAL_ORIENTATION, *piece_states)
 
 
 # ==============================================================================
@@ -85,6 +88,7 @@ def test_duplicate_position_not_allowed():
 
 def test_contains():
     cube = CubeState(
+        CANONICAL_ORIENTATION,
         *create_piece_states(),
     )
 
@@ -95,6 +99,7 @@ def test_contains():
 
 def test_piece_lookup():
     cube = CubeState(
+        CANONICAL_ORIENTATION,
         *create_piece_states(),
     )
 
@@ -105,6 +110,7 @@ def test_piece_lookup():
 
 def test_piece_at_lookup():
     cube = CubeState(
+        CANONICAL_ORIENTATION,
         *create_piece_states(),
     )
 
@@ -119,6 +125,7 @@ def test_piece_at_lookup():
 
 def test_length():
     cube = CubeState(
+        CANONICAL_ORIENTATION,
         *create_piece_states(),
     )
 
@@ -127,6 +134,7 @@ def test_length():
 
 def test_iteration():
     cube = CubeState(
+        CANONICAL_ORIENTATION,
         *create_piece_states(),
     )
 
@@ -139,6 +147,7 @@ def test_iteration():
 
 def test_cube_state_contract():
     cube = CubeState(
+        CANONICAL_ORIENTATION,
         *create_piece_states(),
     )
 

@@ -44,6 +44,13 @@ class Color(Enum):
         """
         return self.display_name
 
+    @property
+    def opposite(self) -> "Color":
+        """
+        Returns the color on the opposite center piece.
+        """
+        return OPPOSITE_COLORS[self]
+
     @classmethod
     def from_mask(cls, mask: int) -> "Color":
         """
@@ -64,4 +71,14 @@ class Color(Enum):
 _MASK_LOOKUP: dict[int, Color] = {
     color.mask: color
     for color in Color
+}
+
+
+OPPOSITE_COLORS: dict[Color, Color] = {
+    Color.WHITE: Color.YELLOW,
+    Color.YELLOW: Color.WHITE,
+    Color.GREEN: Color.BLUE,
+    Color.BLUE: Color.GREEN,
+    Color.RED: Color.ORANGE,
+    Color.ORANGE: Color.RED,
 }

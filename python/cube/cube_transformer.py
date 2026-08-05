@@ -93,7 +93,7 @@ class CubeTransformer:
             for piece_state in cube
         ]
 
-        return CubeState(*piece_states)
+        return CubeState(cube.orientation, *piece_states)
 
     @staticmethod
     def _cycle(
