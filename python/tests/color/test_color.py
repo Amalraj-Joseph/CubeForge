@@ -76,6 +76,23 @@ def test_display_name_and_description(color, display):
 
 
 # ==============================================================================
+# Opposites
+# ==============================================================================
+
+@pytest.mark.parametrize(
+    ("color", "opposite"),
+    [
+        (Color.WHITE, Color.YELLOW),
+        (Color.GREEN, Color.BLUE),
+        (Color.RED, Color.ORANGE),
+    ],
+)
+def test_opposite_colors(color, opposite):
+    assert color.opposite is opposite
+    assert opposite.opposite is color
+
+
+# ==============================================================================
 # Lookup
 # ==============================================================================
 

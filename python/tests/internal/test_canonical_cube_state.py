@@ -2,6 +2,15 @@ from cube.internal.canonical_cube import CANONICAL_CUBE
 from cube.internal.canonical_cube_state import (
     CANONICAL_CUBE_STATE,
 )
+from cube.orientation.cube_orientation import CANONICAL_ORIENTATION
+
+
+# ==============================================================================
+# Cube Orientation
+# ==============================================================================
+
+def test_uses_canonical_orientation():
+    assert CANONICAL_CUBE_STATE.orientation == CANONICAL_ORIENTATION
 
 
 # ==============================================================================
