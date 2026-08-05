@@ -114,7 +114,7 @@ def test_equal_pieces():
     assert hash(first) == hash(second)
 
 
-def test_different_layouts_not_equal():
+def test_pieces_with_equal_signatures_are_equal_despite_layout_difference():
     first = WHITE_GREEN_EDGE
 
     second = Piece(
@@ -136,7 +136,7 @@ def test_different_layouts_not_equal():
         ),
     )
 
-    assert first != second
+    assert first == second
 
 
 def test_different_pieces():

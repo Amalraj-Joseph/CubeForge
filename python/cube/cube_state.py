@@ -5,9 +5,21 @@ from types import MappingProxyType
 from typing import Iterator, Mapping
 
 from cube.orientation.cube_orientation import CubeOrientation
+from cube.internal.canonical_cube import CANONICAL_CUBE
 from cube.piece.piece import Piece
 from cube.piece.piece_state import PieceState
+from cube.piece.piece_type import PieceType
 from cube.position.position import Position
+from cube.internal.canonical_positions import (
+    CORNER_POSITIONS,
+    EDGE_POSITIONS,
+)
+
+
+_CANONICAL_SIGNATURES = frozenset(
+    piece.signature
+    for piece in CANONICAL_CUBE
+)
 
 
 @dataclass(frozen=True, slots=True, init=False)
@@ -56,6 +68,46 @@ class CubeState:
 
             by_piece[piece] = piece_state
             by_position[position] = piece_state
+
+        if {
+            piece_state.piece.signature
+            for piece_state in piece_states
+        } != _CANONICAL_SIGNATURES:
+            raise ValueError(
+                "CubeState must contain every canonical PieceSignature exactly once."
+            )
+
+        edge_states = [
+            piece_state
+            for piece_state in piece_states
+            if piece_state.piece_type is PieceType.EDGE
+        ]
+        corner_states = [
+            piece_state
+            for piece_state in piece_states
+            if piece_state.piece_type is PieceType.CORNER
+        ]
+
+        if sum(state.orientation.value for state in edge_states) % 2:
+            raise ValueError("CubeState has an invalid edge orientation sum.")
+
+        if sum(state.orientation.value for state in corner_states) % 3:
+            raise ValueError("CubeState has an invalid corner orientation sum.")
+
+        if _permutation_parity(
+            tuple(
+                by_position[position].piece.signature
+                for position in EDGE_POSITIONS
+            ),
+            _expected_signatures(EDGE_POSITIONS, orientation),
+        ) != _permutation_parity(
+            tuple(
+                by_position[position].piece.signature
+                for position in CORNER_POSITIONS
+            ),
+            _expected_signatures(CORNER_POSITIONS, orientation),
+        ):
+            raise ValueError("CubeState has mismatched piece permutation parity.")
 
         object.__setattr__(
             self,
@@ -135,3 +187,52 @@ class CubeState:
         Returns the number of PieceStates.
         """
         return len(self._by_piece)
+
+    def describe(self) -> str:
+        """
+        Returns a human-readable description of the entire cube state.
+        """
+        piece_states = sorted(
+            self,
+            key=lambda state: state.position.notation,
+        )
+
+        return "\n".join((
+            f"Orientation: {self.orientation.describe()}",
+            *(state.describe() for state in piece_states),
+        ))
+
+    def __str__(self) -> str:
+        return self.describe()
+
+
+def _permutation_parity(
+    signatures,
+    canonical_signatures,
+) -> int:
+    indexes = [
+        canonical_signatures.index(signature)
+        for signature in signatures
+    ]
+    inversions = sum(
+        left > right
+        for index, left in enumerate(indexes)
+        for right in indexes[index + 1:]
+    )
+
+    return inversions % 2
+
+
+def _expected_signatures(
+    positions,
+    orientation: CubeOrientation,
+):
+    from cube.piece.piece_signature import PieceSignature
+
+    return tuple(
+        PieceSignature(
+            PieceType(position.position_type.value),
+            *(orientation.color_at(face) for face in position.ordered_faces),
+        )
+        for position in positions
+    )

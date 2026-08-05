@@ -99,6 +99,9 @@ A compliant implementation shall reject or prevent
 * duplicate Position occupancy.
 * invalid Cube States.
 
+Mathematical Cube State validity is defined by the Cube Validity and Parity
+specification.
+
 The mechanism used to detect or report invalid input is implementation-defined.
 
 ---
