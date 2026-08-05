@@ -31,6 +31,12 @@ class PieceSignature:
         if len(unique_colors) != len(colors):
             raise ValueError("Duplicate colors are not permitted.")
 
+        if any(
+            color.opposite in unique_colors
+            for color in unique_colors
+        ):
+            raise ValueError("Opposite colors are not permitted.")
+
         expected = piece_type.color_count
 
         if len(unique_colors) != expected:

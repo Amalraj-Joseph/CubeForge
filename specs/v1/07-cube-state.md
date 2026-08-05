@@ -153,7 +153,8 @@ Examples of invalid Cube States include
 - incompatible Piece and Position types
 - illegal Cube Orientation
 
-Additional mathematical validity rules are defined by the Compliance specification.
+Additional mathematical validity rules are defined by the Cube Validity and
+Parity specification.
 
 ---
 

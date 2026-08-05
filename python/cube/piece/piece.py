@@ -8,7 +8,7 @@ from cube.piece.piece_signature import PieceSignature
 from cube.piece.piece_type import PieceType
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, slots=True, eq=False)
 class Piece:
     """
     Represents a physical cubie.
@@ -61,6 +61,18 @@ class Piece:
         Returns True if this Piece contains the given Color.
         """
         return self.signature.contains(color)
+
+    def __eq__(
+        self,
+        other: object,
+    ) -> bool:
+        if not isinstance(other, Piece):
+            return NotImplemented
+
+        return self.signature == other.signature
+
+    def __hash__(self) -> int:
+        return hash(self.signature)
 
     def describe(self) -> str:
         """

@@ -96,3 +96,16 @@ class PieceState:
             )
 
         return self.projected_layout.color_on(face)
+
+    def describe(self) -> str:
+        """
+        Returns a human-readable description.
+        """
+        return (
+            f"Piece={self.piece.describe()}, "
+            f"Position={self.position.describe()}, "
+            f"Orientation={self.orientation.value}"
+        )
+
+    def __str__(self) -> str:
+        return self.describe()

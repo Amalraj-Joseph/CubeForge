@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from cube.color.color import Color
+from cube.face.logical_face import LogicalFace
 
 
 @dataclass(frozen=True, slots=True)
@@ -68,6 +69,22 @@ class CubeOrientation:
     @property
     def bottom(self) -> Color:
         return self.down
+
+    def color_at(
+        self,
+        face: LogicalFace,
+    ) -> Color:
+        """
+        Returns the center color mapped to the given logical face.
+        """
+        return {
+            LogicalFace.UP: self.up,
+            LogicalFace.DOWN: self.down,
+            LogicalFace.FRONT: self.front,
+            LogicalFace.BACK: self.back,
+            LogicalFace.LEFT: self.left,
+            LogicalFace.RIGHT: self.right,
+        }[face]
 
     @classmethod
     def from_top_front(

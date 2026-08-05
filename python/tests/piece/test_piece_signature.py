@@ -82,6 +82,15 @@ def test_invalid_color_count(piece_type, colors):
         PieceSignature(piece_type, *colors)
 
 
+def test_opposite_colors_are_invalid():
+    with pytest.raises(ValueError, match="Opposite colors"):
+        PieceSignature(
+            PieceType.EDGE,
+            Color.WHITE,
+            Color.YELLOW,
+        )
+
+
 def test_duplicate_colors_not_allowed():
     with pytest.raises(ValueError):
         PieceSignature(
