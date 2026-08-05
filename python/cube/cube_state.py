@@ -81,6 +81,18 @@ class CubeState:
             frozenset(self._by_piece.items()),
         ))
 
+    @property
+    def solved(self) -> bool:
+        """
+        Returns whether every visible sticker matches its face center.
+        """
+        return all(
+            piece_state.color_on(face)
+            is self.orientation.color_at(face)
+            for piece_state in self
+            for face in piece_state.position.faces
+        )
+
     def piece_at(
         self,
         position: Position,
