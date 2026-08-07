@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Claude Code local settings (personal, not shared)
+.claude/settings.local.json
+
+# Jekyll (docs/) build output
+docs/_site/
+docs/.jekyll-cache/
+docs/.jekyll-metadata
+docs/.bundle/
+docs/vendor/

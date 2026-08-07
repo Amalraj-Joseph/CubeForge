@@ -1,0 +1,29 @@
+title: CubeForge
+description: >-
+  A language-agnostic, specification-driven Rubik's Cube engine - an
+  immutable core model, a REST + 3D web app, and companion projects,
+  all conforming to one formal specification.
+baseurl: "/CubeForge"
+url: "https://amalraj-joseph.github.io"
+github_repo: "https://github.com/Amalraj-Joseph/CubeForge"
+
+theme: minima
+markdown: kramdown
+
+minima:
+  skin: dark
+
+header_pages:
+  - getting-started.md
+  - architecture.md
+  - api-reference.md
+  - specification.md
+  - web-app.md
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

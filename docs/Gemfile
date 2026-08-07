@@ -1,0 +1,14 @@
+source "https://rubygems.org"
+
+# Matches whatever Jekyll/plugin versions GitHub Pages itself builds with,
+# so `bundle exec jekyll serve` locally behaves the same as the deployed
+# site.
+gem "github-pages", group: :jekyll_plugins
+
+group :jekyll_plugins do
+  gem "jekyll-seo-tag"
+end
+
+# Fixes a common local-serve issue on newer Ruby versions where webrick
+# is no longer bundled by default.
+gem "webrick", "~> 1.8"

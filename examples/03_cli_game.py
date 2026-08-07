@@ -23,16 +23,7 @@ Commands
         Exit the game.
 """
 
-from cube.cube_transformer import CubeTransformer
-from cube.internal.canonical_cube_state import (
-    CANONICAL_CUBE_STATE,
-)
-from cube.notation.algorithm_parser import (
-    parse_algorithm,
-)
-from cube.scramble.scramble_generator import (
-    ScrambleGenerator,
-)
+from cube import Algorithm, Cube, ScrambleGenerator
 
 from common.ascii_renderer import render
 
@@ -76,26 +67,24 @@ Commands
 # ==============================================================================
 
 def main() -> None:
-    cube = CANONICAL_CUBE_STATE
+    cube = Cube.canonical()
 
     move_count = 0
 
     won = False
 
     print_heading(
-        "CubeCore CLI Game"
+        "CubeForge CLI Game"
     )
 
     print_help()
 
     while True:
         print()
-        print(render(cube))
+        print(render(cube.state))
         print()
 
-        solved = (
-            cube == CANONICAL_CUBE_STATE
-        )
+        solved = cube.solved
 
         print(
             f"Status       : {'Solved' if solved else 'Scrambled'}"
@@ -106,7 +95,7 @@ def main() -> None:
         )
 
         command = input(
-            "\nCubeCore> "
+            "\nCubeForge> "
         ).strip()
 
         if not command:
@@ -138,7 +127,7 @@ def main() -> None:
         # ----------------------------------------------------------------------
 
         if lower == "reset":
-            cube = CANONICAL_CUBE_STATE
+            cube = Cube.canonical()
             move_count = 0
             won = False
             continue
@@ -155,10 +144,7 @@ def main() -> None:
                 f"Scramble : {scramble}"
             )
 
-            cube = CubeTransformer.apply_algorithm(
-                CANONICAL_CUBE_STATE,
-                scramble,
-            )
+            cube = Cube.canonical().apply_algorithm(scramble)
 
             move_count = 0
             won = False
@@ -170,12 +156,11 @@ def main() -> None:
         # ----------------------------------------------------------------------
 
         try:
-            algorithm = parse_algorithm(
+            algorithm = Algorithm.parse(
                 command,
             )
 
-            cube = CubeTransformer.apply_algorithm(
-                cube,
+            cube = cube.apply_algorithm(
                 algorithm,
             )
 
@@ -183,10 +168,7 @@ def main() -> None:
                 tuple(algorithm)
             )
 
-            if (
-                not won
-                and cube == CANONICAL_CUBE_STATE
-            ):
+            if not won and cube.solved:
                 won = True
 
                 print()

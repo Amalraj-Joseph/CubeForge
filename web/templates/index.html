@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CubeForge - Rubik's Cube</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="cube-container">
+            <canvas id="cube-canvas"></canvas>
+        </div>
+        <div class="controls">
+            <h1>CubeForge</h1>
+            <div class="subtitle">Interactive 3D Rubik's Cube</div>
+            <div class="status">
+                <span>Moves: <span id="move-count">0</span></span>
+                <span id="solved-status" class="solved">Solved</span>
+            </div>
+            <div class="move-grid">
+                <button class="move-btn face-U" data-move="U">U</button>
+                <button class="move-btn face-U" data-move="U2">U2</button>
+                <button class="move-btn face-U" data-move="U'">U'</button>
+                <button class="move-btn face-D" data-move="D">D</button>
+                <button class="move-btn face-D" data-move="D2">D2</button>
+                <button class="move-btn face-D" data-move="D'">D'</button>
+                <button class="move-btn face-F" data-move="F">F</button>
+                <button class="move-btn face-F" data-move="F2">F2</button>
+                <button class="move-btn face-F" data-move="F'">F'</button>
+                <button class="move-btn face-B" data-move="B">B</button>
+                <button class="move-btn face-B" data-move="B2">B2</button>
+                <button class="move-btn face-B" data-move="B'">B'</button>
+                <button class="move-btn face-L" data-move="L">L</button>
+                <button class="move-btn face-L" data-move="L2">L2</button>
+                <button class="move-btn face-L" data-move="L'">L'</button>
+                <button class="move-btn face-R" data-move="R">R</button>
+                <button class="move-btn face-R" data-move="R2">R2</button>
+                <button class="move-btn face-R" data-move="R'">R'</button>
+            </div>
+            <div class="action-grid">
+                <button class="action-btn scramble" id="scramble-btn">Scramble</button>
+                <button class="action-btn reset" id="reset-btn">Reset</button>
+                <button class="action-btn undo" id="undo-btn">Undo</button>
+                <button class="action-btn solve" id="solve-btn">Solve</button>
+            </div>
+            <div class="algorithm-input">
+                <input type="text" id="algorithm-input" placeholder="R U R' U' ..." spellcheck="false">
+                <button id="apply-alg-btn">Apply</button>
+            </div>
+            <div class="move-history" id="move-history"><span style="color:#666;">Move history...</span></div>
+            <div class="error-msg" id="error-msg"></div>
+            <div class="shortcuts">
+                <kbd>U</kbd> <kbd>D</kbd> <kbd>F</kbd> <kbd>B</kbd> <kbd>L</kbd> <kbd>R</kbd> &middot;
+                <kbd>Shift</kbd>+face inverse &middot; <kbd>Space</kbd> scramble &middot; <kbd>Z</kbd> undo
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/renderer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

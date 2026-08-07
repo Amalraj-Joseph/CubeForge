@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from cube.color.color import Color
-from cube.cube_state import CubeState
-from cube.face.logical_face import LogicalFace
+from cube import Color, CubeState, LogicalFace
 from cube.internal.canonical_face_layouts import (
     FACE_LAYOUTS,
 )

@@ -1,3 +1,11 @@
+> **SUPERSEDED.** This is the original v0.1 draft, kept for historical
+> reference only. It does not reflect the current implementation and shall
+> not be used as a compliance reference. The authoritative specification is
+> `specs/v1/` (see `specs/v1/12-compliance.md` for the compliance
+> requirements and `specs/v1/glossary.md` for current terminology).
+
+---
+
 # 3×3 Cube Specification
 **Version:** 0.1 (Draft)
 

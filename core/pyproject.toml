@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cubeforge-core"
+version = "0.1.0"
+description = "CubeForge: a language-agnostic Rubik's Cube engine (core)"
+requires-python = ">=3.11"
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "SIM"]
+
+[tool.ruff.lint.isort]
+order-by-type = false
