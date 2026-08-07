@@ -6,28 +6,26 @@ creating the canonical solved cube and printing
 its contents.
 """
 
-from cube.internal.canonical_cube_state import (
-    CANONICAL_CUBE_STATE,
-)
+from cube import Cube
 
 
 def main() -> None:
-    cube = CANONICAL_CUBE_STATE
+    cube = Cube.canonical()
 
     print("=" * 60)
     print("CubeCore - Cube Inspection")
     print("=" * 60)
     print()
 
-    print(f"Cube Type : {type(cube).__name__}")
-    print(f"Piece Count: {len(cube)}")
+    print(f"Cube Type : {type(cube.state).__name__}")
+    print(f"Piece Count: {len(cube.state)}")
     print()
 
     print("-" * 60)
     print("Piece States")
     print("-" * 60)
 
-    for piece_state in cube:
+    for piece_state in cube.state:
         print(
             f"{str(piece_state.piece):<32}"
             f"Position={str(piece_state.position):<4}"

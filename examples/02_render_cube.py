@@ -5,14 +5,7 @@ Demonstrates rendering the cube before and after
 performing moves.
 """
 
-from cube.cube_transformer import CubeTransformer
-from cube.internal.canonical_cube_state import (
-    CANONICAL_CUBE_STATE,
-)
-from cube.internal.canonical_moves import (
-    R,
-    R_PRIME,
-)
+from cube import Cube, R, R_PRIME
 
 from common.ascii_renderer import render
 
@@ -26,29 +19,23 @@ def print_heading(title: str) -> None:
 
 
 def main() -> None:
-    cube = CANONICAL_CUBE_STATE
+    cube = Cube.canonical()
 
     print_heading("Solved Cube")
 
-    print(render(cube))
+    print(render(cube.state))
 
-    cube = CubeTransformer.apply(
-        cube,
-        R,
-    )
+    cube = cube.apply(R)
 
     print_heading("After R")
 
-    print(render(cube))
+    print(render(cube.state))
 
-    cube = CubeTransformer.apply(
-        cube,
-        R_PRIME,
-    )
+    cube = cube.apply(R_PRIME)
 
     print_heading("After R R'")
 
-    print(render(cube))
+    print(render(cube.state))
 
 
 if __name__ == "__main__":
