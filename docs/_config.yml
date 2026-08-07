@@ -4,8 +4,8 @@ description: >-
   immutable core model, a REST + 3D web app, and companion projects,
   all conforming to one formal specification.
 baseurl: "/CubeForge"
-url: "https://shadow-codex.github.io"
-github_repo: "https://github.com/shadow-codex/CubeForge"
+url: "https://amalraj-joseph.github.io"
+github_repo: "https://github.com/Amalraj-Joseph/CubeForge"
 
 theme: minima
 markdown: kramdown

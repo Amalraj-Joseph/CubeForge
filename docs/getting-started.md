@@ -11,7 +11,7 @@ CubeForge's engine (`core/`) has zero external dependencies - it's pure
 Python, 3.11+.
 
 ```bash
-git clone https://github.com/shadow-codex/CubeForge.git
+git clone https://github.com/Amalraj-Joseph/CubeForge.git
 cd CubeForge/core
 pip install -e .
 ```

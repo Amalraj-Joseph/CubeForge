@@ -15,7 +15,7 @@ sharing a piece — is enforced at construction time. An illegal
 `CubeState` cannot be built; it isn't checked for and rejected after
 the fact, it's structurally impossible to represent.
 
-📖 **[Full documentation](https://shadow-codex.github.io/CubeForge/)** ·
+📖 **[Full documentation](https://amalraj-joseph.github.io/CubeForge/)** ·
 📋 **[Specification](specs/)** · 📜 **[License](LICENSE)** (Apache 2.0)
 
 ---
@@ -64,8 +64,8 @@ text = cube.to_json()
 assert Cube.from_json(text) == cube
 ```
 
-See [Getting Started](https://shadow-codex.github.io/CubeForge/getting-started.html)
-for the full walkthrough, or [Architecture](https://shadow-codex.github.io/CubeForge/architecture.html)
+See [Getting Started](https://amalraj-joseph.github.io/CubeForge/getting-started.html)
+for the full walkthrough, or [Architecture](https://amalraj-joseph.github.io/CubeForge/architecture.html)
 for the domain model behind it.
 
 ## Try the web app
