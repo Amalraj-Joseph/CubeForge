@@ -74,6 +74,29 @@ def test_rejects_single_twisted_corner():
         CubeState(CANONICAL_CUBE_STATE.orientation, *piece_states)
 
 
+def test_rejects_center_placement_inconsistent_with_orientation():
+    piece_states = create_piece_states()
+    centers = [
+        state for state in piece_states
+        if state.piece_type is PieceType.CENTER
+    ]
+    first, second = centers[:2]
+
+    piece_states[piece_states.index(first)] = PieceState(
+        first.piece,
+        second.position,
+        first.orientation,
+    )
+    piece_states[piece_states.index(second)] = PieceState(
+        second.piece,
+        first.position,
+        second.orientation,
+    )
+
+    with pytest.raises(ValueError, match="center placement"):
+        CubeState(CANONICAL_CUBE_STATE.orientation, *piece_states)
+
+
 def test_rejects_mismatched_permutation_parity():
     piece_states = create_piece_states()
     edges = [

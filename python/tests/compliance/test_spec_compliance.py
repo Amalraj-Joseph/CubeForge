@@ -689,6 +689,29 @@ def test_reject_invalid_cube_states():
 
 
 # ==============================================================================
+# 14-validity-and-parity.md - center placement rule
+# ==============================================================================
+
+def test_reject_center_placement_inconsistent_with_orientation():
+    piece_states = create_piece_states()
+    centers = [
+        state for state in piece_states
+        if state.piece_type is PieceType.CENTER
+    ]
+    first, second = centers[:2]
+
+    piece_states[piece_states.index(first)] = PieceState(
+        first.piece, second.position, first.orientation,
+    )
+    piece_states[piece_states.index(second)] = PieceState(
+        second.piece, first.position, second.orientation,
+    )
+
+    with pytest.raises(ValueError, match="center placement"):
+        CubeState(CANONICAL_ORIENTATION, *piece_states)
+
+
+# ==============================================================================
 # 12-compliance.md - Versioning
 # ==============================================================================
 

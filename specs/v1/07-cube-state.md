@@ -152,9 +152,10 @@ Examples of invalid Cube States include
 - duplicate Position occupancy
 - incompatible Piece and Position types
 - illegal Cube Orientation
+- Center Piece placement inconsistent with Cube Orientation
 
-Additional mathematical validity rules are defined by the Cube Validity and
-Parity specification.
+Additional mathematical validity rules, including the Center Piece
+placement rule, are defined by the Cube Validity and Parity specification.
 
 ---
 
@@ -167,6 +168,7 @@ The following properties shall always hold.
 - Every Piece Signature appears exactly once.
 - Every Position is occupied exactly once.
 - Every Position contains a compatible Piece Type.
+- Every Center Piece's Position agrees with the Cube Orientation.
 - Every Cube State is internally consistent.
 
 ---

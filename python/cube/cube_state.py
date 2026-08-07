@@ -77,6 +77,11 @@ class CubeState:
                 "CubeState must contain every canonical PieceSignature exactly once."
             )
 
+        center_states = [
+            piece_state
+            for piece_state in piece_states
+            if piece_state.piece_type is PieceType.CENTER
+        ]
         edge_states = [
             piece_state
             for piece_state in piece_states
@@ -87,6 +92,17 @@ class CubeState:
             for piece_state in piece_states
             if piece_state.piece_type is PieceType.CORNER
         ]
+
+        for piece_state in center_states:
+            face = piece_state.position.ordered_faces[0]
+
+            if not piece_state.piece.signature.contains(
+                orientation.color_at(face)
+            ):
+                raise ValueError(
+                    "CubeState center placement does not agree with "
+                    "CubeOrientation."
+                )
 
         if sum(state.orientation.value for state in edge_states) % 2:
             raise ValueError("CubeState has an invalid edge orientation sum.")
