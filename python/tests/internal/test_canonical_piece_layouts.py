@@ -2,25 +2,24 @@ from cube.color.color import Color
 from cube.face.logical_face import LogicalFace
 from cube.internal.canonical_piece_layouts import (
     ALL_LAYOUTS,
-    CENTER_LAYOUTS,
-    EDGE_LAYOUTS,
-    CORNER_LAYOUTS,
-    WHITE_CENTER_LAYOUT,
-    YELLOW_CENTER_LAYOUT,
-    GREEN_CENTER_LAYOUT,
     BLUE_CENTER_LAYOUT,
+    CENTER_LAYOUTS,
+    CORNER_LAYOUTS,
+    EDGE_LAYOUTS,
+    GREEN_CENTER_LAYOUT,
+    GREEN_RED_EDGE_LAYOUT,
     ORANGE_CENTER_LAYOUT,
     RED_CENTER_LAYOUT,
+    WHITE_CENTER_LAYOUT,
     WHITE_GREEN_EDGE_LAYOUT,
-    GREEN_RED_EDGE_LAYOUT,
-    YELLOW_BLUE_EDGE_LAYOUT,
     WHITE_GREEN_RED_CORNER_LAYOUT,
     WHITE_RED_BLUE_CORNER_LAYOUT,
+    YELLOW_BLUE_EDGE_LAYOUT,
+    YELLOW_CENTER_LAYOUT,
     YELLOW_GREEN_ORANGE_CORNER_LAYOUT,
 )
 from cube.piece.piece_layout import PieceLayout
 from cube.piece.piece_type import PieceType
-
 
 # ==============================================================================
 # Counts

@@ -91,7 +91,7 @@ class CubeOrientation:
         cls,
         top: Color,
         front: Color,
-    ) -> "CubeOrientation":
+    ) -> CubeOrientation:
         """
         Creates the unique legal orientation for top and front colors.
         """

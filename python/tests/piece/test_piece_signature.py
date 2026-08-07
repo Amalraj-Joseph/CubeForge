@@ -4,7 +4,6 @@ from cube.color.color import Color
 from cube.piece.piece_signature import PieceSignature
 from cube.piece.piece_type import PieceType
 
-
 # ==============================================================================
 # Construction
 # ==============================================================================

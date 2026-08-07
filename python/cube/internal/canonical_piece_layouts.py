@@ -3,7 +3,6 @@ from cube.face.logical_face import LogicalFace
 from cube.piece.piece_layout import PieceLayout
 from cube.piece.piece_type import PieceType
 
-
 # ==============================================================================
 # Centers
 # ==============================================================================

@@ -1,20 +1,20 @@
 from __future__ import annotations
 
+from collections.abc import Iterator, Mapping
 from dataclasses import dataclass, field
 from types import MappingProxyType
-from typing import Iterator, Mapping
 
-from cube.orientation.cube_orientation import CubeOrientation
 from cube.internal.canonical_cube import CANONICAL_CUBE
-from cube.piece.piece import Piece
-from cube.piece.piece_state import PieceState
-from cube.piece.piece_type import PieceType
-from cube.position.position import Position
 from cube.internal.canonical_positions import (
     CORNER_POSITIONS,
     EDGE_POSITIONS,
 )
-
+from cube.orientation.cube_orientation import CubeOrientation
+from cube.piece.piece import Piece
+from cube.piece.piece_signature import PieceSignature
+from cube.piece.piece_state import PieceState
+from cube.piece.piece_type import PieceType
+from cube.position.position import Position
 
 _CANONICAL_SIGNATURES = frozenset(
     piece.signature
@@ -243,8 +243,6 @@ def _expected_signatures(
     positions,
     orientation: CubeOrientation,
 ):
-    from cube.piece.piece_signature import PieceSignature
-
     return tuple(
         PieceSignature(
             PieceType(position.position_type.value),

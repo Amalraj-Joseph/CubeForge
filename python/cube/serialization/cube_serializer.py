@@ -10,11 +10,11 @@ from cube.notation.singmaster import (
     to_position_notation,
 )
 from cube.orientation.cube_orientation import CubeOrientation
+from cube.piece.piece import Piece
 from cube.piece.piece_orientation import PieceOrientation
 from cube.piece.piece_signature import PieceSignature
 from cube.piece.piece_state import PieceState
 from cube.piece.piece_type import PieceType
-
 
 FORMAT_VERSION = "1"
 """
@@ -25,7 +25,7 @@ backwards-compatible. Deserializers reject any other value rather than
 guessing at how to interpret unrecognized data.
 """
 
-_PIECES_BY_SIGNATURE: dict[PieceSignature, "Piece"] = {
+_PIECES_BY_SIGNATURE: dict[PieceSignature, Piece] = {
     piece.signature: piece
     for piece in ALL_PIECES
 }
@@ -182,13 +182,23 @@ class CubeSerializer:
         )
 
         pieces = ";".join(
-            f"{to_position_notation(piece_state.position)}="
-            f"{''.join(color.name[0] for color in piece_state.piece.signature.ordered_colors)}"
-            f"{piece_state.orientation.value}"
+            CubeSerializer._piece_token(piece_state)
             for piece_state in cube
         )
 
         return f"{header}|{pieces}"
+
+    @staticmethod
+    def _piece_token(piece_state: PieceState) -> str:
+        colors = "".join(
+            color.name[0]
+            for color in piece_state.piece.signature.ordered_colors
+        )
+
+        return (
+            f"{to_position_notation(piece_state.position)}="
+            f"{colors}{piece_state.orientation.value}"
+        )
 
     @staticmethod
     def from_compact_string(text: str) -> CubeState:

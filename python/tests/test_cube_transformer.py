@@ -1,6 +1,5 @@
-from cube.cube_transformer import CubeTransformer
-from cube.piece.piece_type import PieceType
 from cube.algorithm.algorithm import Algorithm
+from cube.cube_transformer import CubeTransformer
 from cube.internal.canonical_cube_state import (
     CANONICAL_CUBE_STATE,
 )
@@ -24,6 +23,7 @@ from cube.internal.canonical_moves import (
     U2,
     U_PRIME,
 )
+from cube.piece.piece_type import PieceType
 
 ALL_MOVES = (
     U,

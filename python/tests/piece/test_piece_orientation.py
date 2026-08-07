@@ -3,7 +3,6 @@ import pytest
 from cube.piece.piece_orientation import PieceOrientation
 from cube.piece.piece_type import PieceType
 
-
 # ==============================================================================
 # Construction
 # ==============================================================================

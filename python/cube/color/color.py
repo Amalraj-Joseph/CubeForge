@@ -45,14 +45,14 @@ class Color(Enum):
         return self.display_name
 
     @property
-    def opposite(self) -> "Color":
+    def opposite(self) -> Color:
         """
         Returns the color on the opposite center piece.
         """
         return OPPOSITE_COLORS[self]
 
     @classmethod
-    def from_mask(cls, mask: int) -> "Color":
+    def from_mask(cls, mask: int) -> Color:
         """
         Returns the Color corresponding to the given bit mask.
 

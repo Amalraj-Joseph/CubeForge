@@ -2,7 +2,6 @@ from cube.face.logical_face import LogicalFace
 from cube.position.position import Position
 from cube.position.position_type import PositionType
 
-
 # ==============================================================================
 # Centers
 # ==============================================================================

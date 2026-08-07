@@ -4,7 +4,6 @@ from cube.internal.canonical_cube_state import (
 )
 from cube.orientation.cube_orientation import CANONICAL_ORIENTATION
 
-
 # ==============================================================================
 # Cube Orientation
 # ==============================================================================

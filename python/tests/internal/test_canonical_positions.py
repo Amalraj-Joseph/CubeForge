@@ -12,7 +12,6 @@ from cube.internal.canonical_positions import (
 )
 from cube.position.position_type import PositionType
 
-
 # ==============================================================================
 # Counts
 # ==============================================================================
@@ -37,11 +36,11 @@ def test_all_positions_are_unique():
 # ==============================================================================
 
 def test_all_positions_collection():
-    assert ALL_POSITIONS == (
+    assert (
         *CENTER_POSITIONS,
         *EDGE_POSITIONS,
         *CORNER_POSITIONS,
-    )
+    ) == ALL_POSITIONS
 
 
 # ==============================================================================

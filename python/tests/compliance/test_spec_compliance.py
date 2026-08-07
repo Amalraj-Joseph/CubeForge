@@ -17,7 +17,7 @@ import dataclasses
 
 import pytest
 
-from cube import Cube, CubeAnalyzer, CubeSerializer, CubeState, SPECIFICATION_VERSION
+from cube import Cube, CubeAnalyzer, CubeState, SPECIFICATION_VERSION
 from cube.algorithm.algorithm import Algorithm
 from cube.color.color import Color
 from cube.face.logical_face import LogicalFace
@@ -32,9 +32,10 @@ from cube.internal.canonical_moves import (
     U,
     U_PRIME,
 )
-from cube.internal.canonical_pieces import ALL_PIECES, WHITE_CENTER
 from cube.internal.canonical_piece_layouts import WHITE_CENTER_LAYOUT
-from cube.internal.canonical_positions import ALL_POSITIONS, U as U_POSITION, UF
+from cube.internal.canonical_pieces import ALL_PIECES, WHITE_CENTER
+from cube.internal.canonical_positions import ALL_POSITIONS, UF
+from cube.internal.canonical_positions import U as U_POSITION
 from cube.notation.algorithm_formatter import format_algorithm
 from cube.notation.algorithm_parser import parse_algorithm
 from cube.orientation.cube_orientation import CANONICAL_ORIENTATION, CubeOrientation
@@ -55,7 +56,6 @@ from cube.transformation import (
 )
 from cube.transformation.cube_transformation import CubeTransformation
 from cube.validation import CubeOrientationValidator, CubeStateValidator, PieceValidator
-
 
 ALL_TRANSFORMATIONS = (
     ROTATE_LEFT,
@@ -150,7 +150,10 @@ def test_inspect_solved_property():
 
 def test_represent_standard_moves():
     assert len(ALL_MOVES) == 18
-    assert all(hasattr(move, "face") and hasattr(move, "rotation") for move in ALL_MOVES)
+    assert all(
+        hasattr(move, "face") and hasattr(move, "rotation")
+        for move in ALL_MOVES
+    )
 
 
 def test_interpret_move_notation():
@@ -180,7 +183,7 @@ def test_determine_move_equality():
 
     reconstructed = Move(LogicalFace.RIGHT, Rotation.CLOCKWISE)
 
-    assert R == reconstructed
+    assert reconstructed == R
     assert R != U
 
 
@@ -321,12 +324,12 @@ def test_piece_state_equality():
 
 
 def test_cube_orientation_equality():
-    assert CANONICAL_ORIENTATION == CubeOrientation.from_top_front(
+    assert CubeOrientation.from_top_front(
         Color.WHITE, Color.GREEN
-    )
-    assert CANONICAL_ORIENTATION != CubeOrientation.from_top_front(
+    ) == CANONICAL_ORIENTATION
+    assert CubeOrientation.from_top_front(
         Color.WHITE, Color.RED
-    )
+    ) != CANONICAL_ORIENTATION
 
 
 def test_cube_state_equality():

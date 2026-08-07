@@ -1,25 +1,24 @@
 from __future__ import annotations
 
+from cube.algorithm.algorithm import Algorithm
 from cube.cube_state import CubeState
 from cube.face.logical_face import LogicalFace
+from cube.internal.canonical_positions import ALL_POSITIONS
 from cube.internal.move_cycles import PositionCycle
 from cube.internal.move_transformations import (
     MOVE_TRANSFORMATIONS,
     MoveTransformation,
 )
+from cube.internal.piece_projection import project_at_position
 from cube.move.move import Move
 from cube.move.rotation import Rotation
+from cube.orientation.cube_orientation import CubeOrientation
 from cube.piece.piece import Piece
+from cube.piece.piece_orientation import PieceOrientation
 from cube.piece.piece_state import PieceState
 from cube.piece.piece_type import PieceType
-from cube.piece.piece_orientation import PieceOrientation
 from cube.position.position import Position
 from cube.transformation.cube_transformation import CubeTransformation
-from cube.algorithm.algorithm import Algorithm
-from cube.internal.canonical_positions import ALL_POSITIONS
-from cube.internal.piece_projection import project_at_position
-from cube.orientation.cube_orientation import CubeOrientation
-
 
 _POSITION_BY_FACES = {
     position.faces: position
@@ -58,7 +57,7 @@ class CubeTransformer:
             )
 
         return state
-    
+
     @staticmethod
     def apply_algorithm(
         cube: CubeState,

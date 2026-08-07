@@ -4,7 +4,6 @@ from cube.orientation.cube_orientation import CANONICAL_ORIENTATION
 from cube.piece.piece_orientation import PieceOrientation
 from cube.piece.piece_state import PieceState
 
-
 CANONICAL_CUBE_STATE = CubeState(
     CANONICAL_ORIENTATION,
     *(

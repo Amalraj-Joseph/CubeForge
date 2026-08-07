@@ -31,7 +31,6 @@ from cube.piece.piece import Piece
 from cube.piece.piece_signature import PieceSignature
 from cube.piece.piece_type import PieceType
 
-
 # ==============================================================================
 # Centers
 # ==============================================================================

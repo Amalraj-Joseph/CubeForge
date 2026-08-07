@@ -5,29 +5,28 @@ from cube.internal.canonical_cube_state import (
     CANONICAL_CUBE_STATE,
 )
 from cube.internal.canonical_moves import (
-    U,
-    U2,
-    U_PRIME,
+    B,
+    B2,
+    B_PRIME,
     D,
     D2,
     D_PRIME,
     F,
     F2,
     F_PRIME,
-    B,
-    B2,
-    B_PRIME,
     L,
     L2,
     L_PRIME,
     R,
     R2,
     R_PRIME,
+    U,
+    U2,
+    U_PRIME,
 )
 from cube.notation.algorithm_parser import (
     parse_algorithm,
 )
-
 
 # ==============================================================================
 # Move Inverses
@@ -155,19 +154,19 @@ def test_two_half_turns_are_identity(
 
 def test_scramble_and_inverse_returns_solved():
     scramble = parse_algorithm(
-        (
+
             "R F' U D' L U2 D' U2 R' U' "
             "R2 D2 R' D R' B D R F2 R "
             "U2 D2 L2 D' U2"
-        )
+
     )
 
     inverse = parse_algorithm(
-        (
+
             "U2 D L2 D2 U2 R' F2 R' D' "
             "B' R D' R D2 R2 U R U2 "
             "D U2 L' D U' F R'"
-        )
+
     )
 
     cube = CubeTransformer.apply_algorithm(

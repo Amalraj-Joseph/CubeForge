@@ -25,7 +25,6 @@ from cube.internal.canonical_moves import (
 )
 from cube.move.move import Move
 
-
 _MOVES: tuple[Move, ...] = (
     U,
     U2,

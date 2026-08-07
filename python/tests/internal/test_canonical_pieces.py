@@ -6,7 +6,6 @@ from cube.internal.canonical_pieces import (
 )
 from cube.piece.piece_type import PieceType
 
-
 # ==============================================================================
 # Counts
 # ==============================================================================
@@ -43,11 +42,11 @@ def test_all_piece_signatures_are_unique():
 # ==============================================================================
 
 def test_all_pieces_collection():
-    assert ALL_PIECES == (
+    assert (
         *CENTER_PIECES,
         *EDGE_PIECES,
         *CORNER_PIECES,
-    )
+    ) == ALL_PIECES
 
 
 # ==============================================================================

@@ -3,7 +3,6 @@ from __future__ import annotations
 from cube.cube_state import CubeState
 from cube.orientation.cube_orientation import CubeOrientation
 from cube.piece.piece import Piece
-from cube.piece.piece_type import PieceType
 
 
 class PieceValidator:

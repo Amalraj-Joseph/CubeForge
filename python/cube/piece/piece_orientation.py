@@ -65,7 +65,7 @@ class PieceOrientation:
     def rotate(
         self,
         amount: int,
-    ) -> "PieceOrientation":
+    ) -> PieceOrientation:
         """
         Returns the rotated orientation.
         """

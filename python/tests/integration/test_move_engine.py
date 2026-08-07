@@ -24,7 +24,6 @@ from cube.internal.canonical_moves import (
 )
 from cube.piece.piece_type import PieceType
 
-
 ALL_MOVES = (
     U,
     U2,

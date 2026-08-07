@@ -1,73 +1,61 @@
 from types import MappingProxyType
 
 from cube.internal.canonical_pieces import (
-    WHITE_CENTER,
-    YELLOW_CENTER,
-    GREEN_CENTER,
     BLUE_CENTER,
+    BLUE_ORANGE_EDGE,
+    BLUE_RED_EDGE,
+    GREEN_CENTER,
+    GREEN_ORANGE_EDGE,
+    GREEN_RED_EDGE,
     ORANGE_CENTER,
     RED_CENTER,
-
-    WHITE_GREEN_EDGE,
-    WHITE_RED_EDGE,
     WHITE_BLUE_EDGE,
-    WHITE_ORANGE_EDGE,
-
-    GREEN_RED_EDGE,
-    GREEN_ORANGE_EDGE,
-
-    BLUE_RED_EDGE,
-    BLUE_ORANGE_EDGE,
-
-    YELLOW_GREEN_EDGE,
-    YELLOW_RED_EDGE,
-    YELLOW_BLUE_EDGE,
-    YELLOW_ORANGE_EDGE,
-
-    WHITE_GREEN_RED_CORNER,
-    WHITE_RED_BLUE_CORNER,
     WHITE_BLUE_ORANGE_CORNER,
+    WHITE_CENTER,
+    WHITE_GREEN_EDGE,
+    WHITE_GREEN_RED_CORNER,
+    WHITE_ORANGE_EDGE,
     WHITE_ORANGE_GREEN_CORNER,
-
-    YELLOW_GREEN_ORANGE_CORNER,
-    YELLOW_RED_GREEN_CORNER,
+    WHITE_RED_BLUE_CORNER,
+    WHITE_RED_EDGE,
+    YELLOW_BLUE_EDGE,
     YELLOW_BLUE_RED_CORNER,
+    YELLOW_CENTER,
+    YELLOW_GREEN_EDGE,
+    YELLOW_GREEN_ORANGE_CORNER,
     YELLOW_ORANGE_BLUE_CORNER,
+    YELLOW_ORANGE_EDGE,
+    YELLOW_RED_EDGE,
+    YELLOW_RED_GREEN_CORNER,
 )
 from cube.internal.canonical_positions import (
-    U,
-    D,
-    F,
     B,
+    BL,
+    BR,
+    D,
+    DB,
+    DBR,
+    DF,
+    DFL,
+    DL,
+    DLB,
+    DR,
+    DRF,
+    F,
+    FL,
+    FR,
     L,
     R,
-
-    UF,
-    UR,
+    U,
     UB,
-    UL,
-
-    FR,
-    FL,
-    BR,
-    BL,
-
-    DF,
-    DR,
-    DB,
-    DL,
-
-    UFR,
-    URB,
     UBL,
+    UF,
+    UFR,
+    UL,
     ULF,
-
-    DFL,
-    DRF,
-    DBR,
-    DLB,
+    UR,
+    URB,
 )
-
 
 _CANONICAL_CUBE = {
     # ==========================================================================

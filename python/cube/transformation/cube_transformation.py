@@ -77,7 +77,7 @@ class CubeTransformation:
             if self.map_face(face) is destination
         )
 
-    def inverse(self) -> "CubeTransformation":
+    def inverse(self) -> CubeTransformation:
         """
         Returns the inverse physical rotation.
         """
@@ -88,8 +88,8 @@ class CubeTransformation:
 
     def then(
         self,
-        following: "CubeTransformation",
-    ) -> "CubeTransformation":
+        following: CubeTransformation,
+    ) -> CubeTransformation:
         """
         Returns the transformation obtained by applying self then following.
         """

@@ -4,7 +4,6 @@ from cube.face.logical_face import LogicalFace
 from cube.move.move import Move
 from cube.move.rotation import Rotation
 
-
 # ==============================================================================
 # Construction
 # ==============================================================================

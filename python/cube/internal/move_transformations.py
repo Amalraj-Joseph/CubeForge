@@ -27,11 +27,23 @@ from cube.internal.move_cycles import (
 )
 from cube.internal.orientation_rules import (
     B as B_RULE,
+)
+from cube.internal.orientation_rules import (
     D as D_RULE,
+)
+from cube.internal.orientation_rules import (
     F as F_RULE,
+)
+from cube.internal.orientation_rules import (
     L as L_RULE,
+)
+from cube.internal.orientation_rules import (
     OrientationRule,
+)
+from cube.internal.orientation_rules import (
     R as R_RULE,
+)
+from cube.internal.orientation_rules import (
     U as U_RULE,
 )
 from cube.move.move import Move

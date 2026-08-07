@@ -11,7 +11,6 @@ from cube.internal.canonical_positions import (
 from cube.piece.piece_type import PieceType
 from cube.position.position_type import PositionType
 
-
 # ==============================================================================
 # Counts
 # ==============================================================================

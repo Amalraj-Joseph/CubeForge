@@ -3,14 +3,13 @@ import pytest
 from cube.algorithm.algorithm import Algorithm
 from cube.internal.canonical_moves import (
     R,
-    U,
     R_PRIME,
+    U,
     U_PRIME,
 )
 from cube.notation.algorithm_formatter import (
     format_algorithm,
 )
-
 
 # ==============================================================================
 # Formatting

@@ -1,21 +1,20 @@
 from cube.face.logical_face import LogicalFace
 from cube.internal.canonical_moves import (
     ALL_MOVES,
-    BACK_MOVES,
-    DOWN_MOVES,
-    FRONT_MOVES,
-    LEFT_MOVES,
-    RIGHT_MOVES,
-    UP_MOVES,
-    U,
-    D,
-    F,
     B,
+    BACK_MOVES,
+    D,
+    DOWN_MOVES,
+    F,
+    FRONT_MOVES,
     L,
+    LEFT_MOVES,
     R,
+    RIGHT_MOVES,
+    U,
+    UP_MOVES,
 )
 from cube.move.rotation import Rotation
-
 
 # ==============================================================================
 # Counts
@@ -52,14 +51,14 @@ def test_all_notations_are_unique():
 # ==============================================================================
 
 def test_all_moves_collection():
-    assert ALL_MOVES == (
+    assert (
         *UP_MOVES,
         *DOWN_MOVES,
         *FRONT_MOVES,
         *BACK_MOVES,
         *LEFT_MOVES,
         *RIGHT_MOVES,
-    )
+    ) == ALL_MOVES
 
 
 # ==============================================================================

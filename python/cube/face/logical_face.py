@@ -48,7 +48,7 @@ class LogicalFace(Enum):
         return self.value[3]
 
     @property
-    def opposite(self) -> "LogicalFace":
+    def opposite(self) -> LogicalFace:
         """
         Returns the opposite logical face.
         """
@@ -58,7 +58,7 @@ class LogicalFace(Enum):
         return self.display_name
 
     @classmethod
-    def from_symbol(cls, symbol: str) -> "LogicalFace":
+    def from_symbol(cls, symbol: str) -> LogicalFace:
         """
         Returns the LogicalFace corresponding to the given symbol.
         """

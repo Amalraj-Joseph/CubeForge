@@ -2,8 +2,6 @@ import pytest
 
 from cube.color.color import Color
 from cube.face.logical_face import LogicalFace
-from cube.position.position import Position
-from cube.position.position_type import PositionType
 from cube.internal.piece_projection import (
     project,
     project_at_position,
@@ -11,7 +9,8 @@ from cube.internal.piece_projection import (
 from cube.piece.piece_layout import PieceLayout
 from cube.piece.piece_orientation import PieceOrientation
 from cube.piece.piece_type import PieceType
-
+from cube.position.position import Position
+from cube.position.position_type import PositionType
 
 # ==============================================================================
 # Fixtures

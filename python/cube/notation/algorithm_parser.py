@@ -22,7 +22,6 @@ from cube.internal.canonical_moves import (
     U_PRIME,
 )
 
-
 MOVE_LOOKUP = {
     "U": U,
     "U2": U2,

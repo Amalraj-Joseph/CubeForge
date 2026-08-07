@@ -25,22 +25,22 @@ class Cube:
             raise ValueError("Cube requires a valid CubeState.")
 
     @classmethod
-    def canonical(cls) -> "Cube":
+    def canonical(cls) -> Cube:
         """Returns a cube in the canonical solved state."""
         return cls(CANONICAL_CUBE_STATE)
 
     @classmethod
-    def from_json(cls, text: str) -> "Cube":
+    def from_json(cls, text: str) -> Cube:
         """Constructs a Cube from a JSON string produced by `to_json`."""
         return cls(CubeSerializer.from_json(text))
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Cube":
+    def from_dict(cls, data: dict) -> Cube:
         """Constructs a Cube from a dict produced by `to_dict`."""
         return cls(CubeSerializer.from_dict(data))
 
     @classmethod
-    def from_compact_string(cls, text: str) -> "Cube":
+    def from_compact_string(cls, text: str) -> Cube:
         """Constructs a Cube from a string produced by `to_compact_string`."""
         return cls(CubeSerializer.from_compact_string(text))
 
@@ -67,16 +67,16 @@ class Cube:
     def corner_orientation_errors(self) -> tuple[PieceState, ...]:
         return CubeAnalyzer.corner_orientation_errors(self.state)
 
-    def apply(self, move: Move) -> "Cube":
+    def apply(self, move: Move) -> Cube:
         return Cube(CubeTransformer.apply(self.state, move))
 
-    def apply_algorithm(self, algorithm: Algorithm) -> "Cube":
+    def apply_algorithm(self, algorithm: Algorithm) -> Cube:
         return Cube(CubeTransformer.apply_algorithm(self.state, algorithm))
 
     def apply_transformation(
         self,
         transformation: CubeTransformation,
-    ) -> "Cube":
+    ) -> Cube:
         return Cube(
             CubeTransformer.apply_transformation(
                 self.state,

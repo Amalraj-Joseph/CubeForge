@@ -3,7 +3,6 @@ import pytest
 from cube.color.color import Color
 from cube.orientation.cube_orientation import CubeOrientation
 
-
 LEGAL_TOP_FRONT_PAIRS = [
     (top, front)
     for top in Color
