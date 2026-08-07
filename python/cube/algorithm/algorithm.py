@@ -52,6 +52,25 @@ class Algorithm:
             f"Algorithm({self.notation})"
         )
 
+    @property
+    def inverse(self) -> "Algorithm":
+        """
+        Returns the Algorithm that undoes this Algorithm: each Move
+        inverted, in reverse order.
+        """
+        return Algorithm(
+            *(move.inverse for move in reversed(self.moves))
+        )
+
+    def compose(
+        self,
+        other: "Algorithm",
+    ) -> "Algorithm":
+        """
+        Returns the Algorithm obtained by applying self then other.
+        """
+        return Algorithm(*self.moves, *other.moves)
+
     def __len__(
         self,
     ) -> int:

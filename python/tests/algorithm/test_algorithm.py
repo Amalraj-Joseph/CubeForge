@@ -263,3 +263,75 @@ def test_algorithm_contract():
 def test_non_move_not_allowed():
     with pytest.raises(TypeError):
         Algorithm("R")
+
+
+# ==============================================================================
+# Inverse
+# ==============================================================================
+
+def test_inverse_reverses_order_and_inverts_each_move():
+    algorithm = Algorithm(R, U, R_PRIME)
+
+    assert algorithm.inverse == Algorithm(R, U_PRIME, R_PRIME)
+
+
+def test_inverse_of_empty_algorithm_is_empty():
+    assert Algorithm().inverse == Algorithm()
+
+
+def test_algorithm_then_its_inverse_restores_cube_state():
+    from cube.cube_transformer import CubeTransformer
+    from cube.internal.canonical_cube_state import CANONICAL_CUBE_STATE
+
+    algorithm = Algorithm(R, U, R_PRIME, U_PRIME)
+
+    restored = CubeTransformer.apply_algorithm(
+        CubeTransformer.apply_algorithm(
+            CANONICAL_CUBE_STATE,
+            algorithm,
+        ),
+        algorithm.inverse,
+    )
+
+    assert restored == CANONICAL_CUBE_STATE
+
+
+# ==============================================================================
+# Compose
+# ==============================================================================
+
+def test_compose_concatenates_moves_in_order():
+    first = Algorithm(R, U)
+    second = Algorithm(R_PRIME, U_PRIME)
+
+    assert first.compose(second) == Algorithm(R, U, R_PRIME, U_PRIME)
+
+
+def test_compose_with_empty_algorithm_is_identity():
+    algorithm = Algorithm(R, U)
+
+    assert algorithm.compose(Algorithm()) == algorithm
+    assert Algorithm().compose(algorithm) == algorithm
+
+
+def test_compose_matches_sequential_application():
+    from cube.cube_transformer import CubeTransformer
+    from cube.internal.canonical_cube_state import CANONICAL_CUBE_STATE
+
+    first = Algorithm(R, U)
+    second = Algorithm(R_PRIME, U_PRIME)
+
+    composed_result = CubeTransformer.apply_algorithm(
+        CANONICAL_CUBE_STATE,
+        first.compose(second),
+    )
+
+    sequential_result = CubeTransformer.apply_algorithm(
+        CubeTransformer.apply_algorithm(
+            CANONICAL_CUBE_STATE,
+            first,
+        ),
+        second,
+    )
+
+    assert composed_result == sequential_result
