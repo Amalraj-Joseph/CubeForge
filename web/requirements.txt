@@ -1,0 +1,6 @@
+flask>=3.0
+flask-cors>=4.0
+
+# CubeCore itself, installed in editable mode from the sibling core/
+# subproject - this is what makes `from cube import ...` work here.
+-e ../core
