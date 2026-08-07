@@ -1,7 +1,6 @@
 from cube.internal import canonical_positions as cp
 from cube.position.position import Position
 
-
 _POSITION_TO_NOTATION = {
     cp.U: "U",
     cp.D: "D",

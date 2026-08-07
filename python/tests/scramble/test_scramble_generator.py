@@ -6,7 +6,6 @@ from cube.scramble.scramble_generator import (
     ScrambleGenerator,
 )
 
-
 # ==============================================================================
 # Construction
 # ==============================================================================
@@ -76,6 +75,7 @@ def test_no_consecutive_same_face():
     for previous, current in zip(
         scramble,
         scramble[1:],
+        strict=False,
     ):
         assert (
             previous.face
@@ -142,6 +142,7 @@ def test_scramble_generator_contract():
     for previous, current in zip(
         scramble,
         scramble[1:],
+        strict=False,
     ):
         assert (
             previous.face

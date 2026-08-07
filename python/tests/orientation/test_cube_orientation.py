@@ -3,7 +3,6 @@ import pytest
 from cube.color.color import Color
 from cube.orientation.cube_orientation import CubeOrientation
 
-
 # ==============================================================================
 # Test Data
 # ==============================================================================
@@ -122,6 +121,42 @@ def test_duplicate_colors_are_invalid(
             back,
             left,
             right,
+        )
+
+
+def test_rejects_opposite_top_and_front():
+    with pytest.raises(ValueError, match="adjacent"):
+        CubeOrientation(
+            up=Color.WHITE,
+            down=Color.GREEN,
+            front=Color.YELLOW,
+            back=Color.BLUE,
+            left=Color.RED,
+            right=Color.ORANGE,
+        )
+
+
+def test_rejects_bottom_that_does_not_oppose_top():
+    with pytest.raises(ValueError, match="bottom color must oppose"):
+        CubeOrientation(
+            up=Color.WHITE,
+            down=Color.GREEN,
+            front=Color.BLUE,
+            back=Color.YELLOW,
+            left=Color.ORANGE,
+            right=Color.RED,
+        )
+
+
+def test_rejects_back_that_does_not_oppose_front():
+    with pytest.raises(ValueError, match="back color must oppose"):
+        CubeOrientation(
+            up=Color.WHITE,
+            down=Color.YELLOW,
+            front=Color.GREEN,
+            back=Color.RED,
+            left=Color.ORANGE,
+            right=Color.BLUE,
         )
 
 

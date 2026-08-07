@@ -4,7 +4,6 @@ from cube.face.logical_face import LogicalFace
 from cube.position.position import Position
 from cube.position.position_type import PositionType
 
-
 # ==============================================================================
 # Construction
 # ==============================================================================
@@ -163,6 +162,13 @@ def test_different_positions_are_not_equal():
     )
 
     assert first != second
+
+
+def test_position_is_not_equal_to_a_non_position():
+    position = Position(PositionType.CENTER, LogicalFace.UP)
+
+    assert position != "not a position"
+    assert position != 42
 
 
 def test_hashable():

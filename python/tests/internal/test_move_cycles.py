@@ -1,3 +1,5 @@
+import pytest
+
 from cube.internal.move_cycles import (
     B_CORNER,
     B_EDGE,
@@ -15,7 +17,6 @@ from cube.internal.move_cycles import (
     U_EDGE,
 )
 from cube.position.position_type import PositionType
-
 
 # ==============================================================================
 # Counts
@@ -37,6 +38,15 @@ def test_each_cycle_contains_four_positions():
 def test_each_cycle_contains_unique_positions():
     for cycle in MOVE_CYCLES:
         assert len(set(cycle.positions)) == 4
+
+
+# ==============================================================================
+# Validation
+# ==============================================================================
+
+def test_rejects_a_cycle_with_a_duplicate_position():
+    with pytest.raises(ValueError, match="four unique Positions"):
+        PositionCycle((U_EDGE.positions[0],) * 4)
 
 
 # ==============================================================================

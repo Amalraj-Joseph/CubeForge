@@ -125,7 +125,7 @@ class Position:
         self,
     ) -> str:
         return self.description
-    
+
     def __eq__(
         self,
         other: object,

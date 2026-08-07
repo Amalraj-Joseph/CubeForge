@@ -12,7 +12,6 @@ from cube.piece.piece_type import PieceType
 from cube.position.position import Position
 from cube.position.position_type import PositionType
 
-
 # ==============================================================================
 # Fixtures
 # ==============================================================================
@@ -295,6 +294,23 @@ def test_different_orientation_not_equal():
     )
 
     assert first != second
+
+
+# ==============================================================================
+# Representation
+# ==============================================================================
+
+def test_string_representation_matches_describe():
+    state = PieceState(
+        CENTER_PIECE,
+        CENTER_POSITION,
+        PieceOrientation(
+            PieceType.CENTER,
+            0,
+        ),
+    )
+
+    assert str(state) == state.describe()
 
 
 # ==============================================================================

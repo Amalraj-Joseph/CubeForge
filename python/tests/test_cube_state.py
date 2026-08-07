@@ -43,6 +43,11 @@ def test_requires_exactly_26_piece_states():
         CubeState(CANONICAL_ORIENTATION)
 
 
+def test_rejects_a_non_cube_orientation():
+    with pytest.raises(ValueError, match="CubeOrientation"):
+        CubeState("not an orientation", *create_piece_states())
+
+
 def test_duplicate_piece_not_allowed():
     piece_states = create_piece_states()
 
@@ -164,3 +169,21 @@ def test_cube_state_contract():
         state.position
         for state in cube
     }) == len(cube)
+
+
+# ==============================================================================
+# Hashing & String Representation
+# ==============================================================================
+
+def test_equal_cube_states_have_equal_hashes():
+    first = CubeState(CANONICAL_ORIENTATION, *create_piece_states())
+    second = CubeState(CANONICAL_ORIENTATION, *create_piece_states())
+
+    assert first == second
+    assert hash(first) == hash(second)
+
+
+def test_string_representation_matches_describe():
+    cube = CubeState(CANONICAL_ORIENTATION, *create_piece_states())
+
+    assert str(cube) == cube.describe()

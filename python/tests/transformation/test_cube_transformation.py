@@ -1,6 +1,9 @@
 from collections import deque
 
+import pytest
+
 from cube.cube_transformer import CubeTransformer
+from cube.face.logical_face import LogicalFace
 from cube.internal.canonical_cube_state import CANONICAL_CUBE_STATE
 from cube.internal.canonical_moves import R
 from cube.internal.canonical_positions import F, U
@@ -12,7 +15,7 @@ from cube.transformation import (
     ROTATE_RIGHT,
     ROTATE_UP,
 )
-
+from cube.transformation.cube_transformation import CubeTransformation
 
 PRIMITIVES = (
     ROTATE_LEFT,
@@ -146,3 +149,75 @@ def test_transformation_application_is_deterministic():
     )
 
     assert first == second
+
+
+# ==============================================================================
+# Construction validation
+# ==============================================================================
+
+def test_rejects_a_mapping_missing_a_face():
+    incomplete = {
+        face: face
+        for face in LogicalFace
+        if face is not LogicalFace.UP
+    }
+
+    with pytest.raises(ValueError, match="every LogicalFace exactly once"):
+        CubeTransformation(incomplete)
+
+
+def test_rejects_a_non_bijective_mapping():
+    not_bijective = {face: LogicalFace.UP for face in LogicalFace}
+
+    with pytest.raises(ValueError, match="bijective"):
+        CubeTransformation(not_bijective)
+
+
+def test_rejects_a_mapping_that_does_not_preserve_opposite_faces():
+    breaks_opposites = {
+        LogicalFace.UP: LogicalFace.RIGHT,
+        LogicalFace.RIGHT: LogicalFace.UP,
+        LogicalFace.DOWN: LogicalFace.DOWN,
+        LogicalFace.LEFT: LogicalFace.LEFT,
+        LogicalFace.FRONT: LogicalFace.FRONT,
+        LogicalFace.BACK: LogicalFace.BACK,
+    }
+
+    with pytest.raises(ValueError, match="preserve opposite faces"):
+        CubeTransformation(breaks_opposites)
+
+
+def test_rejects_a_mapping_that_does_not_preserve_handedness():
+    mirror_reflection = {
+        LogicalFace.UP: LogicalFace.UP,
+        LogicalFace.DOWN: LogicalFace.DOWN,
+        LogicalFace.FRONT: LogicalFace.FRONT,
+        LogicalFace.BACK: LogicalFace.BACK,
+        LogicalFace.LEFT: LogicalFace.RIGHT,
+        LogicalFace.RIGHT: LogicalFace.LEFT,
+    }
+
+    with pytest.raises(ValueError, match="handedness"):
+        CubeTransformation(mirror_reflection)
+
+
+# ==============================================================================
+# Name & Description
+# ==============================================================================
+
+def test_named_transformation_exposes_its_name():
+    assert ROTATE_UP.name == "rotate_up"
+
+
+def test_unnamed_transformation_describes_its_face_mapping():
+    identity = CubeTransformation({face: face for face in LogicalFace})
+
+    assert identity.name is None
+    assert identity.describe().startswith("Cube Transformation(")
+    assert "U->U" in identity.describe()
+
+
+def test_unnamed_transformation_string_representation_matches_describe():
+    identity = CubeTransformation({face: face for face in LogicalFace})
+
+    assert str(identity) == identity.describe()

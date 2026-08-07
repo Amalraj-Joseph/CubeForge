@@ -29,6 +29,17 @@ def test_cube_and_piece_state_descriptions_are_human_readable():
     assert "Piece=" in cube.describe()
 
 
+def test_cube_string_representation_matches_describe():
+    cube = Cube.canonical()
+
+    assert str(cube) == cube.describe()
+
+
+def test_cube_rejects_a_non_cube_state():
+    with pytest.raises((ValueError, TypeError)):
+        Cube("not a CubeState")
+
+
 # ----------------------------------------------------------------------
 # Analysis delegation
 # ----------------------------------------------------------------------

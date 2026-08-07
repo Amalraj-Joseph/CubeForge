@@ -12,7 +12,6 @@ from cube.piece.piece_layout import PieceLayout
 from cube.piece.piece_signature import PieceSignature
 from cube.piece.piece_type import PieceType
 
-
 # ==============================================================================
 # Validation
 # ==============================================================================
@@ -141,6 +140,11 @@ def test_pieces_with_equal_signatures_are_equal_despite_layout_difference():
 
 def test_different_pieces():
     assert WHITE_CENTER != WHITE_GREEN_EDGE
+
+
+def test_piece_is_not_equal_to_a_non_piece():
+    assert WHITE_CENTER != "not a piece"
+    assert WHITE_CENTER != 42
 
 
 # ==============================================================================

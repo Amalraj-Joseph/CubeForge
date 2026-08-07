@@ -7,7 +7,6 @@ from cube.internal.canonical_moves import F, R, U
 from cube.serialization import CubeSerializer, FORMAT_VERSION
 from cube.transformation import ROTATE_UP
 
-
 ROUND_TRIP_FORMATS = (
     (CubeSerializer.to_dict, CubeSerializer.from_dict),
     (CubeSerializer.to_json, CubeSerializer.from_json),
@@ -118,6 +117,21 @@ def test_from_compact_string_rejects_wrong_color_count_for_position():
     # "U" is a Center position (1 face) but two colors are given.
     with pytest.raises(ValueError):
         CubeSerializer.from_compact_string(f"{FORMAT_VERSION}:WG|U=WG0")
+
+
+def test_from_compact_string_rejects_wrong_length_orientation_code():
+    with pytest.raises(ValueError, match="orientation code"):
+        CubeSerializer.from_compact_string(f"{FORMAT_VERSION}:W|U=W0")
+
+
+def test_from_compact_string_rejects_a_piece_token_without_separator():
+    with pytest.raises(ValueError, match="piece token"):
+        CubeSerializer.from_compact_string(f"{FORMAT_VERSION}:WG|UF")
+
+
+def test_from_compact_string_rejects_a_piece_token_with_no_colors():
+    with pytest.raises(ValueError, match="piece token"):
+        CubeSerializer.from_compact_string(f"{FORMAT_VERSION}:WG|U=0")
 
 
 # ----------------------------------------------------------------------

@@ -1,11 +1,13 @@
 import pytest
 
+from cube.face.logical_face import LogicalFace
 from cube.internal import canonical_positions as cp
 from cube.notation.singmaster import (
     from_position_notation,
     to_position_notation,
 )
-
+from cube.position.position import Position
+from cube.position.position_type import PositionType
 
 # ==============================================================================
 # Position → Notation
@@ -49,6 +51,17 @@ from cube.notation.singmaster import (
 )
 def test_to_position_notation(position, notation):
     assert to_position_notation(position) == notation
+
+
+def test_to_position_notation_rejects_a_non_canonical_position():
+    non_canonical = Position(
+        PositionType.EDGE,
+        LogicalFace.UP,
+        LogicalFace.DOWN,
+    )
+
+    with pytest.raises(ValueError, match="Unknown canonical position"):
+        to_position_notation(non_canonical)
 
 
 # ==============================================================================
