@@ -126,7 +126,7 @@ def apply_move():
     global current_cube
 
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         move_name = data.get('move')
 
         if move_name not in MOVE_MAP:
@@ -147,7 +147,7 @@ def apply_algorithm():
     global current_cube
 
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         notation = data.get('notation', '')
 
         if not notation:
@@ -172,7 +172,7 @@ def apply_scramble():
     global current_cube
 
     try:
-        data = request.get_json() or {}
+        data = request.get_json(silent=True) or {}
         length = data.get('length', 20)
 
         scramble = ScrambleGenerator.generate(length)
