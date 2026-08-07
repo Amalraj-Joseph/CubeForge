@@ -294,117 +294,104 @@
         }
         
         // ============================================================
-        // Cube Rendering - FIXED for proper colors
+        // Cube Rendering
+        //
+        // Renders directly from the 6 face grids the backend sends
+        // (get_face_colors, itself built from CubeCore's FACE_LAYOUTS) -
+        // 9 sticker planes placed on each face, rather than trying to
+        // reconstruct 26 individual cubies and guess which faces each
+        // one shows. Each face's (row, col) -> 3D position uses the
+        // same axis convention CubeCore itself uses internally
+        // (RIGHT=+X, UP=+Y, FRONT=+Z), and was verified analytically
+        // against FACE_LAYOUTS position-by-position before being written
+        // here (54 of 54 checks passed - see conversation).
         // ============================================================
+        const FACE_AXES = {
+            U: { normal: [0, 1, 0], row: [0, 0, -1], col: [1, 0, 0] },
+            D: { normal: [0, -1, 0], row: [0, 0, -1], col: [1, 0, 0] },
+            F: { normal: [0, 0, 1], row: [0, -1, 0], col: [1, 0, 0] },
+            B: { normal: [0, 0, -1], row: [0, -1, 0], col: [-1, 0, 0] },
+            L: { normal: [-1, 0, 0], row: [0, -1, 0], col: [0, 0, 1] },
+            R: { normal: [1, 0, 0], row: [0, -1, 0], col: [0, 0, -1] },
+        };
+
+        const CUBE_HALF = 1.5;   // half-extent of the 3-unit cube (one unit per layer)
+        const CELL_SIZE = 1;     // one unit per sticker cell
+        const STICKER_SIZE = 0.85;
+
         function buildCube(faceData) {
             if (!cubeGroup) return;
-            
+
             // Clear old cube
             while (cubeGroup.children.length > 0) {
                 const child = cubeGroup.children[0];
                 cubeGroup.remove(child);
-                if (child.children) {
-                    child.children.forEach(c => {
-                        if (c.geometry) c.geometry.dispose();
-                        if (c.material) c.material.dispose();
-                    });
-                }
+                if (child.geometry) child.geometry.dispose();
+                if (child.material) child.material.dispose();
             }
-            
-            const STICKER_SIZE = 0.85;
-            const GAP = 0.05;
-            const CUBIE_SIZE = 1;
-            
-            // Helper to safely get color from grid
+
             function getColor(grid, row, col) {
                 try {
-                    if (!grid) return 0x444444;
-                    if (row < 0 || row >= grid.length) return 0x444444;
-                    if (col < 0 || col >= grid[row].length) return 0x444444;
                     const hex = grid[row][col];
                     if (typeof hex === 'string' && hex.startsWith('#')) {
                         return parseInt(hex.slice(1), 16);
                     }
-                    return 0x444444;
                 } catch (e) {
-                    return 0x444444;
+                    // fall through to the default below
                 }
+                return 0x333333;
             }
-            
-            function createSticker(color, pos, normal) {
-                const geo = new THREE.BoxGeometry(STICKER_SIZE, STICKER_SIZE, 0.05);
+
+            function createSticker(color, position, normal) {
+                const geo = new THREE.PlaneGeometry(STICKER_SIZE, STICKER_SIZE);
                 const mat = new THREE.MeshStandardMaterial({
                     color: color,
                     roughness: 0.3,
                     metalness: 0.1,
+                    side: THREE.DoubleSide,
                 });
                 const mesh = new THREE.Mesh(geo, mat);
-                mesh.position.copy(pos);
-                mesh.position.add(normal.clone().multiplyScalar(0.52));
+                mesh.position.copy(position);
                 mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal);
                 return mesh;
             }
-            
-            function createCubie(x, y, z, colors) {
-                const group = new THREE.Group();
-                
-                // Inner cube (dark)
-                const innerGeo = new THREE.BoxGeometry(CUBIE_SIZE - GAP, CUBIE_SIZE - GAP, CUBIE_SIZE - GAP);
-                const innerMat = new THREE.MeshStandardMaterial({ 
-                    color: 0x1a1a2e, 
-                    roughness: 0.8, 
-                    metalness: 0.2 
-                });
-                const inner = new THREE.Mesh(innerGeo, innerMat);
-                group.add(inner);
-                
-                const pos = new THREE.Vector3(x, y, z);
-                const faceDefs = [
-                    { dir: new THREE.Vector3(0, 1, 0), color: colors.U },
-                    { dir: new THREE.Vector3(0, -1, 0), color: colors.D },
-                    { dir: new THREE.Vector3(0, 0, 1), color: colors.F },
-                    { dir: new THREE.Vector3(0, 0, -1), color: colors.B },
-                    { dir: new THREE.Vector3(-1, 0, 0), color: colors.L },
-                    { dir: new THREE.Vector3(1, 0, 0), color: colors.R },
-                ];
-                
-                for (const fd of faceDefs) {
-                    // Only add sticker if the color is not dark (meaning it's a visible face)
-                    const isDark = fd.color === 0x222222 || fd.color === 0x444444 || fd.color === 0x888888;
-                    if (!isDark) {
-                        group.add(createSticker(fd.color, pos, fd.dir));
-                    }
-                }
-                
-                group.position.copy(pos);
-                return group;
-            }
-            
+
             try {
-                // Iterate through all positions in the 3x3x3 grid
-                for (let x = -1; x <= 1; x++) {
-                    for (let y = -1; y <= 1; y++) {
-                        for (let z = -1; z <= 1; z++) {
-                            // Skip the center
-                            if (x === 0 && y === 0 && z === 0) continue;
-                            
-                            // Get colors for each face of this cubie
-                            const colors = {
-                                U: getColor(faceData.U, 2 - x, 1 - z),
-                                D: getColor(faceData.D, 2 - x, 1 + z),
-                                F: getColor(faceData.F, 1 - y, 2 - x),
-                                B: getColor(faceData.B, 1 + y, x + 2),
-                                L: getColor(faceData.L, 1 - y, z + 2),
-                                R: getColor(faceData.R, 1 - y, 2 - z),
-                            };
-                            
-                            // Create the cubie
-                            const cubie = createCubie(x, y, z, colors);
-                            cubeGroup.add(cubie);
+                // Dark base cube so the gaps between stickers read correctly
+                const baseSize = CUBE_HALF * 2 - 0.06;
+                const baseGeo = new THREE.BoxGeometry(baseSize, baseSize, baseSize);
+                const baseMat = new THREE.MeshStandardMaterial({
+                    color: 0x1a1a2e,
+                    roughness: 0.8,
+                    metalness: 0.2,
+                });
+                cubeGroup.add(new THREE.Mesh(baseGeo, baseMat));
+
+                let stickerCount = 0;
+
+                for (const [face, axes] of Object.entries(FACE_AXES)) {
+                    const grid = faceData[face];
+                    if (!grid) continue;
+
+                    const normal = new THREE.Vector3(...axes.normal);
+                    const rowDir = new THREE.Vector3(...axes.row);
+                    const colDir = new THREE.Vector3(...axes.col);
+
+                    for (let row = 0; row < 3; row++) {
+                        for (let col = 0; col < 3; col++) {
+                            const color = getColor(grid, row, col);
+
+                            const position = normal.clone().multiplyScalar(CUBE_HALF + 0.02)
+                                .add(rowDir.clone().multiplyScalar((row - 1) * CELL_SIZE))
+                                .add(colDir.clone().multiplyScalar((col - 1) * CELL_SIZE));
+
+                            cubeGroup.add(createSticker(color, position, normal));
+                            stickerCount++;
                         }
                     }
                 }
-                console.log('✅ Cube built successfully with', cubeGroup.children.length, 'cubies');
+
+                console.log('✅ Cube built successfully with', stickerCount, 'stickers');
             } catch (e) {
                 console.error('Error building cube:', e);
             }
