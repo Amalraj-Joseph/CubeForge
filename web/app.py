@@ -1,9 +1,9 @@
 """
 CubeForge Web - a Flask REST API + browser UI for an interactive,
-CubeCore-backed Rubik's Cube.
+CubeForge-backed Rubik's Cube.
 
 This is a companion project, not part of the core engine: it consumes
-CubeCore purely through its public API (see ../core/cube/__init__.py) and
+CubeForge purely through its public API (see ../core/cube/__init__.py) and
 carries its own dependencies (Flask, Flask-CORS) that the engine itself
 never depends on.
 """
@@ -66,7 +66,7 @@ def get_face_colors(cube_state):
     Returns a dict with 3x3 grids for each face (U, D, F, B, L, R). Each
     cell contains a hex color string like '#FFFFFF'.
 
-    Built directly from CubeCore's own FACE_LAYOUTS: for each face, that's
+    Built directly from CubeForge's own FACE_LAYOUTS: for each face, that's
     the 9 Positions on it in raster order (row-major, top-left to
     bottom-right), so every cell is filled from a single, already-correct
     source of truth rather than a hand-maintained lookup table.

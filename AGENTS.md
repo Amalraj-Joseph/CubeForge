@@ -1,6 +1,6 @@
-# CubeCore Development Guide for AI Agents
+# CubeForge Development Guide for AI Agents
 
-This repository implements **CubeCore**, a specification-driven Rubik's Cube
+This repository implements **CubeForge**, a specification-driven Rubik's Cube
 engine.
 
 The specification is the source of truth.
@@ -166,9 +166,9 @@ Never modify companion projects unless explicitly requested.
 
 Companion projects include:
 
-- CubeCore Web
-- CubeCore CLI
-- CubeCore MCP
+- CubeForge Web
+- CubeForge CLI
+- CubeForge MCP
 - Java implementation
 - Rust implementation
 - C# implementation

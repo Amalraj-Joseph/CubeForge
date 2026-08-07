@@ -1,5 +1,5 @@
 """
-Public API of the CubeCore engine.
+Public API of the CubeForge engine.
 
 This is the only supported entry point. Anything reachable only through
 `cube.internal` is a private implementation detail and carries no

@@ -1,4 +1,4 @@
-# CubeCore Roadmap v2 — Spec-Compliance Refined
+# CubeForge Roadmap v2 — Spec-Compliance Refined
 
 **Current Version:** v0.6.0-cli-game
 **Target of this document:** v1.0 stable core
@@ -321,16 +321,16 @@ suite — unchanged.
 
 ## Companion Projects (unchanged, for reference)
 
-- **CubeCore Web** — Flask + REST + Three.js, depends on v0.8/v0.9.
-- **CubeCore CLI** — depends on v1.1 for whole-cube rotation input.
-- **CubeCore MCP** — tool mapping is now direct:
+- **CubeForge Web** — Flask + REST + Three.js, depends on v0.8/v0.9.
+- **CubeForge CLI** — depends on v1.1 for whole-cube rotation input.
+- **CubeForge MCP** — tool mapping is now direct:
   `validate_cube` → v0.10, `analyze_cube` → v0.8, `solve_cube` → v1.4,
   `apply_algorithm`/`generate_scramble` → existing core.
-- **CubeCore Java / Rust / C#** — should not begin until v1.0 tag exists;
+- **CubeForge Java / Rust / C#** — should not begin until v1.0 tag exists;
   porting against a moving core wastes the port effort.
 
 ## Philosophy (unchanged)
 
-CubeCore remains a pure mathematical engine with zero dependency on
+CubeForge remains a pure mathematical engine with zero dependency on
 Flask, HTML, JavaScript, Three.js, OpenGL, Pygame, MCP, WebSockets, or
-databases. Those depend on CubeCore, never the reverse.
+databases. Those depend on CubeForge, never the reverse.

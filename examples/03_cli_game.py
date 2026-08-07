@@ -74,7 +74,7 @@ def main() -> None:
     won = False
 
     print_heading(
-        "CubeCore CLI Game"
+        "CubeForge CLI Game"
     )
 
     print_help()
@@ -95,7 +95,7 @@ def main() -> None:
         )
 
         command = input(
-            "\nCubeCore> "
+            "\nCubeForge> "
         ).strip()
 
         if not command:

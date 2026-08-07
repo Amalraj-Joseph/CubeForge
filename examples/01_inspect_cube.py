@@ -1,7 +1,7 @@
 """
 Examples - Inspect Cube
 
-Demonstrates the basic CubeCore domain model by
+Demonstrates the basic CubeForge domain model by
 creating the canonical solved cube and printing
 its contents.
 """
@@ -13,7 +13,7 @@ def main() -> None:
     cube = Cube.canonical()
 
     print("=" * 60)
-    print("CubeCore - Cube Inspection")
+    print("CubeForge - Cube Inspection")
     print("=" * 60)
     print()
 

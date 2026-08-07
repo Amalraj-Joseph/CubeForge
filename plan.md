@@ -1,4 +1,4 @@
-# CubeCore Roadmap (Status Index)
+# CubeForge Roadmap (Status Index)
 
 Current Version: v0.10 — Cube Orientation, Analysis, Serialization,
 Validation, and Cube Transformations are implemented. Public API exposure
@@ -117,9 +117,9 @@ language ports.
 
 # Philosophy
 
-CubeCore should remain a pure mathematical engine. It should never depend
+CubeForge should remain a pure mathematical engine. It should never depend
 on Flask, HTML, JavaScript, Three.js, OpenGL, Pygame, MCP, WebSockets, or
-databases. Those technologies should depend on CubeCore, not the reverse.
+databases. Those technologies should depend on CubeForge, not the reverse.
 
 ---
 

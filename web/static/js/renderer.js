@@ -1,11 +1,11 @@
 // Three.js scene setup and cube rendering.
 //
 // buildCube() renders directly from the 6 face grids the backend sends
-// (get_face_colors in app.py, itself built from CubeCore's own
+// (get_face_colors in app.py, itself built from CubeForge's own
 // FACE_LAYOUTS) - 9 sticker planes placed on each face, rather than
 // reconstructing 26 individual cubies and guessing which faces each one
 // shows. Each face's (row, col) -> 3D position uses the same axis
-// convention CubeCore uses internally (RIGHT=+X, UP=+Y, FRONT=+Z), and
+// convention CubeForge uses internally (RIGHT=+X, UP=+Y, FRONT=+Z), and
 // was verified analytically against every FACE_LAYOUTS entry before
 // being written here.
 

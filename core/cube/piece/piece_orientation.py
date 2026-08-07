@@ -36,7 +36,7 @@ class PieceOrientation:
             Two clockwise twists
             (equivalent to one counterclockwise twist).
 
-    CubeCore adopts clockwise corner twists as the positive direction.
+    CubeForge adopts clockwise corner twists as the positive direction.
     All corner orientation arithmetic is performed modulo 3.
     Edge orientation arithmetic is performed modulo 2.
     """
