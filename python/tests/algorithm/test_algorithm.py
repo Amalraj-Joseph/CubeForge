@@ -10,7 +10,6 @@ from cube.internal.canonical_moves import (
 )
 from cube.move.move import Move
 
-
 # ==============================================================================
 # Construction
 # ==============================================================================
@@ -263,6 +262,23 @@ def test_algorithm_contract():
 def test_non_move_not_allowed():
     with pytest.raises(TypeError):
         Algorithm("R")
+
+
+# ==============================================================================
+# Parsing
+# ==============================================================================
+
+def test_parse_matches_construction():
+    assert Algorithm.parse("R U R' U'") == Algorithm(R, U, R_PRIME, U_PRIME)
+
+
+def test_parse_empty_notation():
+    assert Algorithm.parse("") == Algorithm()
+
+
+def test_parse_rejects_invalid_token():
+    with pytest.raises(ValueError):
+        Algorithm.parse("R X")
 
 
 # ==============================================================================

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 from dataclasses import dataclass
-from typing import Iterator
 
 from cube.move.move import Move
 
@@ -33,6 +33,20 @@ class Algorithm:
             tuple(moves),
         )
 
+    @classmethod
+    def parse(cls, notation: str) -> Algorithm:
+        """
+        Parses Singmaster notation (e.g. "R U R' U'") into an Algorithm.
+
+        Raises:
+            ValueError: If any token is not a valid Move.
+        """
+        # Deferred to break a genuine import cycle: algorithm_parser
+        # imports Algorithm to build its return value.
+        from cube.notation.algorithm_parser import parse_algorithm
+
+        return parse_algorithm(notation)
+
     @property
     def notation(self) -> str:
         """
@@ -53,7 +67,7 @@ class Algorithm:
         )
 
     @property
-    def inverse(self) -> "Algorithm":
+    def inverse(self) -> Algorithm:
         """
         Returns the Algorithm that undoes this Algorithm: each Move
         inverted, in reverse order.
@@ -64,8 +78,8 @@ class Algorithm:
 
     def compose(
         self,
-        other: "Algorithm",
-    ) -> "Algorithm":
+        other: Algorithm,
+    ) -> Algorithm:
         """
         Returns the Algorithm obtained by applying self then other.
         """
