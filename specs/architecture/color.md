@@ -1,3 +1,15 @@
+> **Non-normative.** This document describes implementation-specific design
+> rationale for the reference Python/Java implementations (the bit-mask
+> `Enum` representation of Color). It is not part of the normative 3×3 Cube
+> Specification and does not define compliance requirements. Where this
+> document appears to conflict with `specs/v1/01-colors.md` (for example,
+> `01-colors.md` leaves the internal representation of Color
+> implementation-defined, while this document prescribes a specific bit-mask
+> encoding), `specs/v1/01-colors.md` governs. See that document for the
+> normative Color model.
+
+---
+
 # Color
 
 ## Purpose
