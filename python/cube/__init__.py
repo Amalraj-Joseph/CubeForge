@@ -13,6 +13,7 @@ from cube.color.color import Color
 from cube.cube import Cube
 from cube.cube_state import CubeState
 from cube.face.logical_face import LogicalFace
+from cube.internal.canonical_face_layouts import FACE_LAYOUTS
 from cube.internal.canonical_moves import (
     ALL_MOVES,
     B,
@@ -82,6 +83,7 @@ __all__ = [
     "F",
     "F2",
     "F_PRIME",
+    "FACE_LAYOUTS",
     "L",
     "L2",
     "L_PRIME",

@@ -24,6 +24,7 @@ PUBLIC_NAMES = (
     "CubeTransformation",
     "D", "D2", "D_PRIME",
     "F", "F2", "F_PRIME",
+    "FACE_LAYOUTS",
     "L", "L2", "L_PRIME",
     "LogicalFace",
     "Move",
@@ -60,6 +61,14 @@ def test_every_declared_name_is_actually_importable():
 def test_all_eighteen_canonical_moves_are_exported():
     assert len(cube.ALL_MOVES) == 18
     assert all(isinstance(move, cube.Move) for move in cube.ALL_MOVES)
+
+
+def test_face_layouts_gives_nine_positions_per_face_in_raster_order():
+    assert set(cube.FACE_LAYOUTS) == set(cube.LogicalFace)
+
+    for face, positions in cube.FACE_LAYOUTS.items():
+        assert len(positions) == 9
+        assert all(position.contains(face) for position in positions)
 
 
 def test_a_sibling_project_can_work_through_the_public_api_alone():
