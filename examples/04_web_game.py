@@ -138,19 +138,16 @@ def get_face_colors(cube_state):
 
 
 def check_solved(cube_state):
-    """Check if the cube is solved."""
-    try:
-        face_colors = get_face_colors(cube_state)
-        for grid in face_colors.values():
-            colors = set()
-            for row in grid:
-                for col in row:
-                    colors.add(col)
-            if len(colors) > 1:
-                return False
-        return True
-    except:
-        return False
+    """
+    Check if the cube is solved.
+
+    Delegates to CubeState.solved rather than re-deriving it from
+    get_face_colors' grid: that grid only fills in one of each edge's
+    two faces and one of each corner's three (a separate, pre-existing
+    rendering gap - see get_face_colors), so it under-reports colors
+    and can never agree that a solved cube is solved.
+    """
+    return cube_state.solved
 
 
 @app.route('/')
@@ -210,11 +207,15 @@ def apply_algorithm():
         if not notation:
             return jsonify({'success': False, 'error': 'Empty algorithm'}), 400
         
-        algorithm = Algorithm.parse(notation)
+        try:
+            algorithm = Algorithm.parse(notation)
+        except ValueError as ex:
+            return jsonify({'success': False, 'error': str(ex)}), 400
+
         current_cube = current_cube.apply_algorithm(algorithm)
         for move in algorithm:
             move_history.append(move)
-        
+
         face_colors = get_face_colors(current_cube.state)
         return jsonify({
             'success': True,
