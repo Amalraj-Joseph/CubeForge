@@ -5,12 +5,10 @@ title: Specification
 
 # Specification
 
-CubeForge's engine is a reference implementation of a formal,
-language-agnostic specification - not the other way around. The
-specification defines the mathematical model and every invariant;
-`core/` is one implementation of it, and any future port (Java, Rust,
-C#, whatever) is expected to conform to the same rules and produce
-identical observable behavior.
+CubeForge's engine is built to a formal specification - not the other
+way around. The specification defines the mathematical model and every
+invariant; `core/` conforms to it, and that conformance is checked by
+an executable, per-requirement compliance suite rather than assumed.
 
 The specification lives in [`specs/`]({{ site.github_repo }}/tree/main/specs)
 in the repository. This page is an index into it - the formal documents

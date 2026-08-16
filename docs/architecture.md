@@ -18,6 +18,13 @@ no piece and no cube orientation can ever put two opposite colors on the
 same physical thing. That single rule underpins almost every other
 invariant in the engine.
 
+{% include cube-diagram.html
+   up="w,w,w,w,w,w,w,w,w"
+   front="g,g,g,g,g,g,g,g,g"
+   right="r,r,r,r,r,r,r,r,r"
+   size="170" static="true"
+   caption="White/Green/Red visible here - Yellow, Blue, and Orange sit opposite them, out of view" %}
+
 ## Pieces
 
 A standard cube has exactly twenty-six physical pieces: six **centers**
@@ -26,6 +33,13 @@ A standard cube has exactly twenty-six physical pieces: six **centers**
 `Piece(WHITE, GREEN, RED)` always refers to the same physical cubie,
 regardless of where it currently sits or how it's twisted. Position and
 orientation are explicitly *not* part of identity.
+
+{% include cube-diagram.html
+   up="g,g,g,w,w,w,w,w,r"
+   front="o,r,r,g,g,w,g,g,r"
+   right="w,g,b,r,r,r,y,r,r"
+   size="170" static="true"
+   caption="Cube.canonical().apply_algorithm(&quot;R U R' U' R U R' U'&quot;) - same 26 pieces, different positions and orientations" %}
 
 ## Positions
 

@@ -5,10 +5,29 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cubeforge-core"
 version = "0.1.0"
-description = "CubeForge: a language-agnostic Rubik's Cube engine (core)"
+description = "A rigorously specified, zero-dependency Rubik's Cube engine"
+license = "Apache-2.0"
+authors = [
+    { name = "Amalraj Joseph" },
+]
+keywords = ["rubiks-cube", "cube", "puzzle", "simulation"]
 requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Games/Entertainment :: Puzzle Games",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 dependencies = []
+
+[project.urls]
+Homepage = "https://amalraj-joseph.github.io/CubeForge/"
+Documentation = "https://amalraj-joseph.github.io/CubeForge/"
+Repository = "https://github.com/Amalraj-Joseph/CubeForge"
+Issues = "https://github.com/Amalraj-Joseph/CubeForge/issues"
 
 [project.optional-dependencies]
 dev = [
