@@ -11,6 +11,13 @@ API backed by `core/`, rendered client-side with
 on Flask and Flask-CORS, which the engine itself never does, and it
 consumes `core/` purely through [the public API]({{ '/api-reference.html' | relative_url }}).
 
+{% include webapp-mockup.html %}
+
+A static HTML/CSS reproduction of the running app - not a screenshot -
+built from the same six sticker colors and cube-diagram component used
+throughout this site, with fixed sample data standing in for a live
+session.
+
 ## Running it
 
 ```bash
@@ -52,5 +59,26 @@ is a common source of subtle rendering bugs in cube visualizers.
 
 ## API
 
-See [`web/README.md`]({{ site.github_repo }}/blob/main/web/README.md#api)
-for the full route reference.
+| Route | Method | Body | Description |
+|---|---|---|---|
+| `/` | GET | - | Serves the page |
+| `/api/state` | GET | - | Current cube state |
+| `/api/move` | POST | `{"move": "R"}` | Apply a single move |
+| `/api/algorithm` | POST | `{"notation": "R U R' U'"}` | Apply a Singmaster-notation algorithm |
+| `/api/scramble` | POST | `{"length": 20}` (optional) | Apply a random scramble |
+| `/api/reset` | POST | - | Reset to the canonical solved cube |
+| `/api/undo` | POST | - | Undo the last move |
+
+Every response has the shape:
+
+```json
+{
+  "success": true,
+  "faces": {"U": [[...],[...],[...]], "D": [...], "F": [...], "B": [...], "L": [...], "R": [...]},
+  "move_count": 0,
+  "move_history": "",
+  "is_solved": true
+}
+```
+
+or, on failure, `{"success": false, "error": "..."}` with a 4xx/5xx status.

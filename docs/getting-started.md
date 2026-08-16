@@ -34,7 +34,7 @@ of the specification agrees on.
    up="w,w,w,w,w,w,w,w,w"
    front="g,g,g,g,g,g,g,g,g"
    right="r,r,r,r,r,r,r,r,r"
-   size="180" static="true"
+   px="180" static="true"
    caption="Cube.canonical()" %}
 
 ## Applying a move
@@ -56,13 +56,13 @@ layer change; everything else on the cube is untouched:
    up="w,w,w,w,w,w,w,w,w"
    front="g,g,g,g,g,g,g,g,g"
    right="r,r,r,r,r,r,r,r,r"
-   size="160" static="true"
+   px="160" static="true"
    caption="Before: Cube.canonical()" %}
 {% include cube-diagram.html
    up="w,w,g,w,w,g,w,w,g"
    front="g,g,y,g,g,y,g,g,y"
    right="r,r,r,r,r,r,r,r,r"
-   size="160" static="true"
+   px="160" static="true"
    caption="After: .apply(R)" %}
 </div>
 

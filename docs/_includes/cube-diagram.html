@@ -8,13 +8,13 @@ Usage:
      up="w,w,w,w,w,w,w,w,w"
      front="g,g,g,g,g,g,g,g,g"
      right="r,r,r,r,r,r,r,r,r"
-     size="220" %}
+     px="220" %}
 Optional: caption="...", static="true" (disable the idle sway).
 {% endcomment -%}
 {%- assign up_colors = include.up | split: "," -%}
 {%- assign front_colors = include.front | split: "," -%}
 {%- assign right_colors = include.right | split: "," -%}
-{%- assign diagram_size = include.size | default: 220 -%}
+{%- assign diagram_size = include.px | default: 220 -%}
 <figure class="cube-stage{% if include.static %} cube-stage--static{% endif %}" style="--size: {{ diagram_size }}px;">
   <div class="cube-diagram">
     <div class="cube-face cube-face--up">

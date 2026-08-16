@@ -622,6 +622,194 @@ figure.cube-stage {
 }
 
 /* ===========================================================
+   Specification sub-pages (breadcrumb + pager)
+   =========================================================== */
+.spec-crumb {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-faint);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+.spec-crumb:hover {
+  color: var(--text-dim);
+}
+
+.spec-pager {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.spec-pager a {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+.spec-pager a:hover {
+  color: var(--text);
+}
+.spec-pager__next {
+  margin-left: auto;
+  text-align: right;
+}
+
+/* ===========================================================
+   Web app mockup (static HTML/CSS reproduction, not a screenshot)
+   =========================================================== */
+.app-mock {
+  background: var(--ink-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 1.75rem 0 2.25rem;
+}
+.app-mock__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--ink-800);
+  border-bottom: 1px solid var(--line);
+}
+.app-mock__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.app-mock__url {
+  margin-left: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+.app-mock__body {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+}
+.app-mock__viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: radial-gradient(circle at 30% 20%, rgba(47, 111, 237, 0.1), transparent 60%);
+}
+.app-mock__viewport .cube-stage {
+  padding: 0;
+}
+.app-mock__panel {
+  padding: 1.5rem 1.75rem;
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.app-mock__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0;
+}
+.app-mock__subtitle {
+  margin: -0.4rem 0 0.3rem;
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+.app-mock__status {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--ink-800);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  color: var(--text-dim);
+}
+.app-mock__solved--no {
+  color: var(--sticker-red);
+}
+.app-mock__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+.app-mock__btn {
+  text-align: center;
+  padding: 0.4rem 0;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #101118;
+}
+.app-mock__btn.c-w {
+  background: var(--sticker-white);
+}
+.app-mock__btn.c-y {
+  background: var(--sticker-yellow);
+}
+.app-mock__btn.c-g {
+  background: var(--sticker-green);
+  color: #fff;
+}
+.app-mock__btn.c-b {
+  background: var(--sticker-blue);
+  color: #fff;
+}
+.app-mock__btn.c-r {
+  background: var(--sticker-red);
+  color: #fff;
+}
+.app-mock__btn.c-o {
+  background: var(--sticker-orange);
+}
+.app-mock__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.app-mock__action {
+  flex: 1;
+  text-align: center;
+  padding: 0.45rem 0;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  border: 1px solid var(--line-strong);
+  color: var(--text-dim);
+}
+.app-mock__action--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.app-mock__input {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.app-mock__input-text {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--ink-950);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  color: var(--text);
+}
+.app-mock__apply {
+  font-size: 0.78rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  background: var(--ink-800);
+  border: 1px solid var(--line-strong);
+  color: var(--text-dim);
+}
+
+/* ===========================================================
    Responsive
    =========================================================== */
 @media (max-width: 860px) {
@@ -638,5 +826,12 @@ figure.cube-stage {
   }
   .cube-stage {
     padding-top: 0.5rem;
+  }
+  .app-mock__body {
+    grid-template-columns: 1fr;
+  }
+  .app-mock__panel {
+    border-left: none;
+    border-top: 1px solid var(--line);
   }
 }
