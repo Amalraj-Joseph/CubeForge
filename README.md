@@ -1,13 +1,18 @@
 # CubeForge
 
-**A language-agnostic, specification-driven Rubik's Cube engine.**
+**A rigorously specified, pure-Python Rubik's Cube engine.**
 
-CubeForge answers one question the same way no matter what implements
-it: given a cube state and an operation, what's the resulting state?
-That question is answered once, formally, in [the specification](specs/)
-— not baked into any one implementation's internals. The Python engine
-in this repository is the reference implementation; a web app and a set
-of example scripts build on top of it through its public API alone.
+[![CI](https://github.com/Amalraj-Joseph/CubeForge/actions/workflows/ci.yml/badge.svg)](https://github.com/Amalraj-Joseph/CubeForge/actions/workflows/ci.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](core/pyproject.toml)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-informational)](LICENSE)
+
+CubeForge answers one question the same way every time: given a cube
+state and an operation, what's the resulting state? That question is
+answered once, formally, in [the specification](specs/) — not left to
+drift inside implementation internals. `core/` is a zero-dependency
+Python engine built to that specification, with an executable
+compliance suite as the proof; a web app and a set of example scripts
+build on top of it through its public API alone.
 
 Every invariant a physical cube actually has — exactly twenty-six
 pieces, valid orientation and permutation parity, opposite colors never
@@ -111,17 +116,7 @@ This implementation conforms to the 3×3 Cube Specification, Version 1.0
 claim made executable: one test per mandatory requirement in
 `specs/v1/11-api.md` and `specs/v1/12-compliance.md`, run against the
 real public API — the permanent regression gate for this
-implementation and any future port.
-
-## Companion projects
-
-| Project | Status |
-|---|---|
-| [`web/`](web/README.md) — Flask + REST + Three.js | Done |
-| CLI game (`examples/03_cli_game.py`) | Done, as an example |
-| Solver (beginner / CFOP / Kociemba) | Planned — see `specs/v1.1/plan.md` |
-| MCP server | Planned |
-| Java / Rust / C# ports | Planned, after `core/` reaches a stable v1.0 tag |
+implementation.
 
 ## License
 

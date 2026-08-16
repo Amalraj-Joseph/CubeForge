@@ -1,0 +1,18 @@
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      {% include cube-glyph.html face="w,r,g,y,b,o,r,w,g" size="22" %}
+      <span class="brand__name">CubeForge</span>
+    </a>
+
+    <nav class="site-nav">
+      {% for path in site.header_pages %}
+        {% assign nav_page = site.pages | where: "path", path | first %}
+        {% if nav_page %}
+          <a href="{{ nav_page.url | relative_url }}"{% if page.url == nav_page.url %} class="active" aria-current="page"{% endif %}>{{ nav_page.title }}</a>
+        {% endif %}
+      {% endfor %}
+      <a class="site-nav__source" href="{{ site.github_repo }}">Source ↗</a>
+    </nav>
+  </div>
+</header>

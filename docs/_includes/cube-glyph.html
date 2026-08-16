@@ -1,0 +1,12 @@
+{% comment %}
+Flat 3x3 swatch icon, same color tokens as cube-diagram.html but no
+3D transform - used at small sizes (nav brand mark, card icons) where
+a full isometric diagram would be too busy.
+
+Usage: {% include cube-glyph.html face="w,r,g,y,b,o,r,w,g" size="40" %}
+{% endcomment -%}
+{%- assign glyph_colors = include.face | split: "," -%}
+{%- assign glyph_size = include.size | default: 40 -%}
+<span class="cube-glyph" style="--gsize: {{ glyph_size }}px;" aria-hidden="true">
+  {% for c in glyph_colors %}<span class="sticker c-{{ c }}"></span>{% endfor %}
+</span>

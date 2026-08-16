@@ -1,0 +1,31 @@
+{% comment %}
+Renders a 3-faces-visible (Up/Front/Right) isometric cube from real
+face-color data, using the same letter codes as the rest of the site:
+w=white y=yellow g=green b=blue r=red o=orange.
+
+Usage:
+  {% include cube-diagram.html
+     up="w,w,w,w,w,w,w,w,w"
+     front="g,g,g,g,g,g,g,g,g"
+     right="r,r,r,r,r,r,r,r,r"
+     size="220" %}
+Optional: caption="...", static="true" (disable the idle sway).
+{% endcomment -%}
+{%- assign up_colors = include.up | split: "," -%}
+{%- assign front_colors = include.front | split: "," -%}
+{%- assign right_colors = include.right | split: "," -%}
+{%- assign diagram_size = include.size | default: 220 -%}
+<figure class="cube-stage{% if include.static %} cube-stage--static{% endif %}" style="--size: {{ diagram_size }}px;">
+  <div class="cube-diagram">
+    <div class="cube-face cube-face--up">
+      {% for c in up_colors %}<span class="sticker c-{{ c }}"></span>{% endfor %}
+    </div>
+    <div class="cube-face cube-face--front">
+      {% for c in front_colors %}<span class="sticker c-{{ c }}"></span>{% endfor %}
+    </div>
+    <div class="cube-face cube-face--right">
+      {% for c in right_colors %}<span class="sticker c-{{ c }}"></span>{% endfor %}
+    </div>
+  </div>
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>
