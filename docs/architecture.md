@@ -22,7 +22,7 @@ invariant in the engine.
    up="w,w,w,w,w,w,w,w,w"
    front="g,g,g,g,g,g,g,g,g"
    right="r,r,r,r,r,r,r,r,r"
-   size="170" static="true"
+   px="170" static="true"
    caption="White/Green/Red visible here - Yellow, Blue, and Orange sit opposite them, out of view" %}
 
 ## Pieces
@@ -38,7 +38,7 @@ orientation are explicitly *not* part of identity.
    up="g,g,g,w,w,w,w,w,r"
    front="o,r,r,g,g,w,g,g,r"
    right="w,g,b,r,r,r,y,r,r"
-   size="170" static="true"
+   px="170" static="true"
    caption="Cube.canonical().apply_algorithm(&quot;R U R' U' R U R' U'&quot;) - same 26 pieces, different positions and orientations" %}
 
 ## Positions

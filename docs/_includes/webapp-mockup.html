@@ -1,0 +1,48 @@
+{% comment %}
+A static HTML/CSS reproduction of the running web app's UI - not a
+screenshot. Every color and label matches the real app (web/templates/
+index.html, web/static/css/style.css); the cube state and move counter
+are fixed sample data, not a live render.
+{% endcomment -%}
+<div class="app-mock" aria-hidden="true">
+  <div class="app-mock__bar">
+    <span class="app-mock__dot"></span>
+    <span class="app-mock__dot"></span>
+    <span class="app-mock__dot"></span>
+    <span class="app-mock__url">localhost:5000</span>
+  </div>
+  <div class="app-mock__body">
+    <div class="app-mock__viewport">
+      {% include cube-diagram.html
+         up="g,g,g,w,w,w,w,w,r"
+         front="o,r,r,g,g,w,g,g,r"
+         right="w,g,b,r,r,r,y,r,r"
+         px="190" static="true" %}
+    </div>
+    <div class="app-mock__panel">
+      <p class="app-mock__title">CubeForge</p>
+      <p class="app-mock__subtitle">Interactive 3D Rubik's Cube</p>
+      <div class="app-mock__status">
+        <span>Moves: <strong>8</strong></span>
+        <span class="app-mock__solved app-mock__solved--no">Unsolved</span>
+      </div>
+      <div class="app-mock__grid">
+        <span class="app-mock__btn c-w">U</span><span class="app-mock__btn c-w">U2</span><span class="app-mock__btn c-w">U'</span>
+        <span class="app-mock__btn c-y">D</span><span class="app-mock__btn c-y">D2</span><span class="app-mock__btn c-y">D'</span>
+        <span class="app-mock__btn c-g">F</span><span class="app-mock__btn c-g">F2</span><span class="app-mock__btn c-g">F'</span>
+        <span class="app-mock__btn c-b">B</span><span class="app-mock__btn c-b">B2</span><span class="app-mock__btn c-b">B'</span>
+        <span class="app-mock__btn c-o">L</span><span class="app-mock__btn c-o">L2</span><span class="app-mock__btn c-o">L'</span>
+        <span class="app-mock__btn c-r">R</span><span class="app-mock__btn c-r">R2</span><span class="app-mock__btn c-r">R'</span>
+      </div>
+      <div class="app-mock__actions">
+        <span class="app-mock__action app-mock__action--primary">Scramble</span>
+        <span class="app-mock__action">Reset</span>
+        <span class="app-mock__action">Undo</span>
+      </div>
+      <div class="app-mock__input">
+        <span class="app-mock__input-text">R U R' U'</span>
+        <span class="app-mock__apply">Apply</span>
+      </div>
+    </div>
+  </div>
+</div>

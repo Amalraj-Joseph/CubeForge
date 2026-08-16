@@ -11,6 +11,9 @@ pure-CSS cube rendered from real face-color data, no images) and its
 flat-icon sibling `_includes/cube-glyph.html`. Both take plain
 comma-separated color-letter grids (`w,y,g,b,r,o`) as Liquid
 parameters - see the comment at the top of each file for usage.
+`_includes/webapp-mockup.html` reuses `cube-diagram.html` inside a
+static HTML/CSS reproduction of the `web/` app's UI chrome (fixed
+sample data, not a screenshot).
 
 ## Publishing
 
@@ -42,12 +45,15 @@ this to a user/org root site instead).
 | `getting-started.md`   | Install and quickstart                                |
 | `architecture.md`      | The domain model, in prose                             |
 | `api-reference.md`     | The public API surface (`cube/__init__.py`)            |
-| `specification.md`     | Index into the formal spec (`../specs/`)                |
-| `web-app.md`           | How to run the `web/` companion app                     |
+| `specification.md`     | Index into the spec, linking to the rendered docs below |
+| `specification/*.md`   | Every `specs/v1/` document, rendered in full on-site    |
+| `web-app.md`           | How to run the `web/` companion app, plus a static UI mockup |
 | `_layouts/`             | `default` (shell), `page` (docs pages), `home` (index)  |
-| `_includes/`            | `head`/`header`/`footer`, `cube-diagram`, `cube-glyph`   |
+| `_includes/`            | `head`/`header`/`footer`, `cube-diagram`, `cube-glyph`, `webapp-mockup` |
 | `assets/css/main.css`   | The entire theme - tokens, layout, typography, cube CSS  |
 
-The formal specification itself (`specs/`) is **not** duplicated here -
-this site links out to it. `specs/` is the source of truth for behavior;
-these pages are the approachable tour.
+`specification/*.md` is a verbatim copy of each `specs/v1/*.md` document
+(front matter and prev/next nav added, content untouched) so visitors can
+read the actual specification without leaving the site. `specs/` remains
+the source of truth - if the two ever drift, `specs/` wins; re-copy the
+affected file(s) here to resync.

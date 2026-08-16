@@ -35,7 +35,7 @@ cube.solved            # False</code></pre>
        up="w,w,w,w,w,w,w,w,w"
        front="g,g,g,g,g,g,g,g,g"
        right="r,r,r,r,r,r,r,r,r"
-       size="260"
+       px="260"
        caption="Cube.canonical() — the one, unique solved state" %}
   </div>
 </section>

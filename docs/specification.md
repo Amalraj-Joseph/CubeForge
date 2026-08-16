@@ -11,35 +11,43 @@ invariant; `core/` conforms to it, and that conformance is checked by
 an executable, per-requirement compliance suite rather than assumed.
 
 The specification lives in [`specs/`]({{ site.github_repo }}/tree/main/specs)
-in the repository. This page is an index into it - the formal documents
-themselves are the source of truth, not this summary.
+in the repository; every normative document is also rendered in full
+below, so you never have to leave the site to read it. This page is an
+index into it - the formal documents themselves are the source of
+truth, not this summary.
+
+{% include cube-diagram.html
+   up="w,w,w,w,w,w,w,w,w"
+   front="g,g,g,g,g,g,g,g,g"
+   right="r,r,r,r,r,r,r,r,r"
+   px="190" static="true"
+   caption="Fourteen documents, one cube: colors in, whole-cube transformations out" %}
 
 ## Core model (`specs/v1/`)
 
 | Document | Defines |
 |---|---|
-| [01-colors]({{ site.github_repo }}/blob/main/specs/v1/01-colors.md) | The six colors and their opposite pairs |
-| [02-pieces]({{ site.github_repo }}/blob/main/specs/v1/02-pieces.md) | The twenty-six physical pieces and their identity |
-| [03-logical-faces]({{ site.github_repo }}/blob/main/specs/v1/03-logical-faces.md) | The six logical faces |
-| [04-orientation]({{ site.github_repo }}/blob/main/specs/v1/04-orientation.md) | Cube orientation and the twenty-four legal orientations |
-| [05-positions]({{ site.github_repo }}/blob/main/specs/v1/05-positions.md) | The twenty-six fixed positions |
-| [06-piece-state]({{ site.github_repo }}/blob/main/specs/v1/06-piece-state.md) | Position + orientation for one piece |
-| [07-cube-state]({{ site.github_repo }}/blob/main/specs/v1/07-cube-state.md) | The complete cube state, equality, and the Solved property |
-| [08-moves]({{ site.github_repo }}/blob/main/specs/v1/08-moves.md) | The eighteen standard moves |
-| [09-algorithms]({{ site.github_repo }}/blob/main/specs/v1/09-algorithms.md) | Sequences of moves |
-| [10-transformations]({{ site.github_repo }}/blob/main/specs/v1/10-transformations.md) | Whole-cube rotations |
-| [11-api]({{ site.github_repo }}/blob/main/specs/v1/11-api.md) | The minimum capabilities every implementation shall provide |
-| [12-compliance]({{ site.github_repo }}/blob/main/specs/v1/12-compliance.md) | What it means to claim conformance |
-| [13-notation]({{ site.github_repo }}/blob/main/specs/v1/13-notation.md) | Singmaster notation |
-| [14-validity-and-parity]({{ site.github_repo }}/blob/main/specs/v1/14-validity-and-parity.md) | The mathematical validity rules (parity, orientation sums) |
+| [01 · Colors](specification/01-colors.html) | The six colors and their opposite pairs |
+| [02 · Pieces](specification/02-pieces.html) | The twenty-six physical pieces and their identity |
+| [03 · Logical Faces](specification/03-logical-faces.html) | The six logical faces |
+| [04 · Orientation](specification/04-orientation.html) | Cube orientation and the twenty-four legal orientations |
+| [05 · Positions](specification/05-positions.html) | The twenty-six fixed positions |
+| [06 · Piece State](specification/06-piece-state.html) | Position + orientation for one piece |
+| [07 · Cube State](specification/07-cube-state.html) | The complete cube state, equality, and the Solved property |
+| [08 · Moves](specification/08-moves.html) | The eighteen standard moves |
+| [09 · Algorithms](specification/09-algorithms.html) | Sequences of moves |
+| [10 · Transformations](specification/10-transformations.html) | Whole-cube rotations |
+| [11 · API](specification/11-api.html) | The minimum capabilities every implementation shall provide |
+| [12 · Compliance](specification/12-compliance.html) | What it means to claim conformance |
+| [13 · Notation](specification/13-notation.html) | Singmaster notation |
+| [14 · Validity & Parity](specification/14-validity-and-parity.html) | The mathematical validity rules (parity, orientation sums) |
 
 ## Supporting documents
 
 | Document | Purpose |
 |---|---|
-| [glossary]({{ site.github_repo }}/blob/main/specs/v1/glossary.md) | Terminology used throughout the spec |
-| [conformance-tests]({{ site.github_repo }}/blob/main/specs/v1/conformance-tests.md) | What a conformance test suite must verify |
-| [v1.1/plan.md]({{ site.github_repo }}/blob/main/specs/v1.1/plan.md) | The phase-by-phase implementation roadmap for `core/` |
+| [Glossary](specification/glossary.html) | Terminology used throughout the spec |
+| [Conformance Tests](specification/conformance-tests.html) | What a conformance test suite must verify |
 
 ## Historical / non-normative
 
