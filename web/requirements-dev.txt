@@ -1,0 +1,7 @@
+# Test-only dependencies. Install with:
+#   pip install -r requirements.txt -r requirements-dev.txt
+#   playwright install --with-deps chromium
+-r requirements.txt
+
+pytest>=8.0
+pytest-playwright>=0.5

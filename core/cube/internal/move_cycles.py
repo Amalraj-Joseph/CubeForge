@@ -124,9 +124,9 @@ B_EDGE = PositionCycle(
 B_CORNER = PositionCycle(
     (
         URB,
-        DBR,
-        DLB,
         UBL,
+        DLB,
+        DBR,
     )
 )
 
