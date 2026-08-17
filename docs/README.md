@@ -21,6 +21,9 @@ In the repository's Settings -> Pages, set:
 
 - **Source:** Deploy from a branch
 - **Branch:** `main` (or whichever is the default branch), folder `/docs`
+- **Custom domain:** `cubeforge.amalraj.dev` (backed by `docs/CNAME`, which
+  GitHub Pages requires to live in the published source folder; DNS points
+  the `cubeforge` subdomain at GitHub Pages via a `CNAME` record)
 
 That's it - no GitHub Actions workflow required. GitHub rebuilds the site
 within a minute or two of every push that touches `docs/`.
@@ -33,9 +36,9 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Then open http://localhost:4000/CubeForge/ (the `baseurl` in `_config.yml`
-matches how GitHub Pages serves a project site - drop it if you ever move
-this to a user/org root site instead).
+Then open http://localhost:4000/ (`baseurl` in `_config.yml` is empty
+since the site is served from the `cubeforge.amalraj.dev` custom domain
+at the root, not from a `/CubeForge` project-page path).
 
 ## Structure
 
