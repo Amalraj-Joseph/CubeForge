@@ -3,8 +3,8 @@ description: >-
   A rigorously specified, pure-Python Rubik's Cube engine - an
   immutable core model with zero dependencies, a full compliance test
   suite, and a REST + 3D web app built on top of it.
-baseurl: "/CubeForge"
-url: "https://amalraj-joseph.github.io"
+baseurl: ""
+url: "https://cubeforge.amalraj.dev"
 github_repo: "https://github.com/Amalraj-Joseph/CubeForge"
 
 markdown: kramdown
